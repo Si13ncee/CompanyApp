@@ -1,5 +1,6 @@
 ﻿using CompanyApp.Data;
 using CompanyApp.Models;
+using CompanyApp.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,10 +17,14 @@ namespace CompanyApp
     public partial class CompanyExplorer : Form
     {
         private OrganizationUnit? selectedUnit;
+        private readonly OrganizationServices _organizationServices;
+        private readonly EmployeeServices _employeeService;
 
         public CompanyExplorer()
         {
             InitializeComponent();
+            _organizationServices = new OrganizationServices();
+            _employeeService = new EmployeeServices();
         }
 
         private void splitContainer2_Panel2_Paint(object sender, PaintEventArgs e)
@@ -84,21 +89,21 @@ namespace CompanyApp
 
         private void CompanyExplorer_Load(object sender, EventArgs e)
         {
-            LoadUnitTypes();
-            LoadManagers();
+
+            LoadUnitTypes(); // loaduje enum typov pre OrganizationUnits
+            LoadManagers(); // loadne všetkých zamestnancov do comboBoxu pre výber
             LoadEmployees();
             LoadOrganizationTree();
         }
         private void LoadManagers()
         {
-            using (var db = new CompanyContext())
-            {
-                var employees = db.Employees.ToList();
 
-                comboBoxManager.DataSource = employees;
-                comboBoxManager.DisplayMember = "FullName";
-                comboBoxManager.ValueMember = "EmployeeId";
-            }
+            var employees = _employeeService.GetAll();
+
+            comboBoxManager.DataSource = employees;
+            comboBoxManager.DisplayMember = "FullName";
+            comboBoxManager.ValueMember = "EmployeeId";
+
         }
         private void LoadUnitTypes()
         {
@@ -107,25 +112,24 @@ namespace CompanyApp
 
         private void LoadOrganizationTree()
         {
-            using (var db = new CompanyContext())
+
+            var units = _organizationServices.GetAll();
+
+            tvOrganization.Nodes.Clear();
+
+            // Vytiahneme z listu organizačnej štruktúry firmy prvky, ktoré nemajú parentID -> korene stromov.
+            var rootUnits = units
+                .Where(x => x.ParentId == null)
+                .ToList();
+
+            // Pridruží koreňom všetky ich potomkov/branches.
+            foreach (var unit in rootUnits)
             {
-                var units = db.OrganizationUnits.ToList();
+                TreeNode node = CreateTreeNode(unit, units);
 
-                tvOrganization.Nodes.Clear();
-
-                // Vytiahneme z listu organizačnej štruktúry firmy prvky, ktoré nemajú parentID -> korene stromov.
-                var rootUnits = units
-                    .Where(x => x.ParentId == null)
-                    .ToList();
-
-                // Pridruží koreňom všetky ich potomkov/branches.
-                foreach (var unit in rootUnits)
-                {
-                    TreeNode node = CreateTreeNode(unit, units);
-
-                    tvOrganization.Nodes.Add(node);
-                }
+                tvOrganization.Nodes.Add(node);
             }
+            
         }
         private TreeNode CreateTreeNode(OrganizationUnit unit, List<OrganizationUnit> allUnits)
         {
@@ -149,12 +153,11 @@ namespace CompanyApp
         }
         private void LoadEmployees()
         {
-            using (var db = new CompanyContext())
-            {
-                var employees = db.Employees.ToList();
 
-                dgvEmployees.DataSource = employees;
-            }
+
+            var employees = _employeeService.GetAll();
+            dgvEmployees.DataSource = employees;
+            
         }
 
         private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
@@ -182,33 +185,43 @@ namespace CompanyApp
             if (selectedUnit is null)
                 return;
 
-            using (var db = new CompanyContext())
+            // Validácia
+            if (string.IsNullOrWhiteSpace(textBoxName.Text))
             {
-                var unit = db.OrganizationUnits.Find(selectedUnit.UnitID);
-
-                if (unit == null)
-                    return;
-
-                // Validácia
-                if (string.IsNullOrWhiteSpace(textBoxName.Text))
-                {
-                    MessageBox.Show("Name is required.");
-                    return;
-                }
-
-                if (string.IsNullOrWhiteSpace(textBoxCode.Text))
-                {
-                    MessageBox.Show("Code is required.");
-                    return;
-                }
-
-                unit.Name = textBoxName.Text;
-                unit.Code = textBoxCode.Text;
-                unit.UnitType = (UnitType)comboBoxType.SelectedItem;
-                unit.ManagerId = (int?)comboBoxManager.SelectedValue;
-
-                db.SaveChanges();
+                MessageBox.Show("Name is required.");
+                return;
             }
+
+            if (string.IsNullOrWhiteSpace(textBoxCode.Text))
+            {
+                MessageBox.Show("Code is required.");
+                return;
+            }
+
+            // napĺňame selected unit
+            selectedUnit.Name = textBoxName.Text;
+            selectedUnit.Code = textBoxCode.Text;
+            selectedUnit.UnitType = (UnitType)comboBoxType.SelectedItem;
+            selectedUnit.ManagerId = (int?)comboBoxManager.SelectedValue;
+
+            var result = _organizationServices.Update(selectedUnit);
+
+            if (!result.Success)
+            {
+                MessageBox.Show(
+                    result.Message,
+                    "Save error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
+
+            MessageBox.Show(
+                "Organization unit saved.",
+                "Success",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
 
             LoadOrganizationTree();
         }
