@@ -35,7 +35,7 @@
             HelpBTN = new ToolStripMenuItem();
             splitContainer1 = new SplitContainer();
             splitContainer2 = new SplitContainer();
-            OrganisationView = new TreeView();
+            tvOrganization = new TreeView();
             splitContainer4 = new SplitContainer();
             textBox1 = new TextBox();
             splitContainer5 = new SplitContainer();
@@ -57,7 +57,7 @@
             buttonAddEmp = new Button();
             buttonEditEmp = new Button();
             buttonDeleteEmp = new Button();
-            dataGridView1 = new DataGridView();
+            dgvEmployees = new DataGridView();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
@@ -82,7 +82,7 @@
             splitContainer3.Panel2.SuspendLayout();
             splitContainer3.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvEmployees).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -142,7 +142,7 @@
             // 
             // splitContainer2.Panel1
             // 
-            splitContainer2.Panel1.Controls.Add(OrganisationView);
+            splitContainer2.Panel1.Controls.Add(tvOrganization);
             // 
             // splitContainer2.Panel2
             // 
@@ -152,14 +152,15 @@
             splitContainer2.SplitterDistance = 250;
             splitContainer2.TabIndex = 0;
             // 
-            // OrganisationView
+            // tvOrganization
             // 
-            OrganisationView.Dock = DockStyle.Fill;
-            OrganisationView.HideSelection = false;
-            OrganisationView.Location = new Point(0, 0);
-            OrganisationView.Name = "OrganisationView";
-            OrganisationView.Size = new Size(250, 250);
-            OrganisationView.TabIndex = 0;
+            tvOrganization.Dock = DockStyle.Fill;
+            tvOrganization.HideSelection = false;
+            tvOrganization.Location = new Point(0, 0);
+            tvOrganization.Name = "tvOrganization";
+            tvOrganization.Size = new Size(250, 250);
+            tvOrganization.TabIndex = 0;
+            tvOrganization.AfterSelect += tvOrganization_AfterSelect;
             // 
             // splitContainer4
             // 
@@ -375,7 +376,7 @@
             // 
             // splitContainer3.Panel2
             // 
-            splitContainer3.Panel2.Controls.Add(dataGridView1);
+            splitContainer3.Panel2.Controls.Add(dgvEmployees);
             splitContainer3.Panel2MinSize = 24;
             splitContainer3.Size = new Size(800, 172);
             splitContainer3.SplitterDistance = 25;
@@ -429,14 +430,16 @@
             buttonDeleteEmp.Text = "Delete Employee";
             buttonDeleteEmp.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // dgvEmployees
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(0, 0);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(800, 143);
-            dataGridView1.TabIndex = 0;
+            dgvEmployees.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvEmployees.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvEmployees.Dock = DockStyle.Fill;
+            dgvEmployees.Location = new Point(0, 0);
+            dgvEmployees.Name = "dgvEmployees";
+            dgvEmployees.Size = new Size(800, 143);
+            dgvEmployees.TabIndex = 0;
+            dgvEmployees.CellContentClick += dataGridView1_CellContentClick_1;
             // 
             // CompanyExplorer
             // 
@@ -480,7 +483,7 @@
             splitContainer3.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvEmployees).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -493,10 +496,10 @@
         private ToolStripMenuItem HelpBTN;
         private SplitContainer splitContainer1;
         private SplitContainer splitContainer2;
-        private TreeView OrganisationView;
+        private TreeView tvOrganization;
         private SplitContainer splitContainer3;
         private FlowLayoutPanel flowLayoutPanel1;
-        private DataGridView dataGridView1;
+        private DataGridView dgvEmployees;
         private SplitContainer splitContainer4;
         private TextBox textBox1;
         private SplitContainer splitContainer5;

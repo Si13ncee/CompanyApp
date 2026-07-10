@@ -21,6 +21,6 @@ namespace CompanyApp.Models
         public string? Email { get; set; }
 
         public override string ToString() => $"{FirstName} {LastName}";
-        
+        public string FullName => string.IsNullOrWhiteSpace(Title) ? $"{FirstName} {LastName}" : $"{Title} {FirstName} {LastName}";
     }
 }
