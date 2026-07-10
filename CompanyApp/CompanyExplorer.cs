@@ -15,6 +15,8 @@ namespace CompanyApp
 {
     public partial class CompanyExplorer : Form
     {
+        private OrganizationUnit? selectedUnit;
+
         public CompanyExplorer()
         {
             InitializeComponent();
@@ -162,17 +164,53 @@ namespace CompanyApp
 
         private void tvOrganization_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            OrganizationUnit unit = (OrganizationUnit)e.Node.Tag;
+            selectedUnit = (OrganizationUnit)e.Node.Tag;
 
 
-            textBoxName.Text = unit.Name;
-            textBoxCode.Text = unit.Code;
+            textBoxName.Text = selectedUnit.Name;
+            textBoxCode.Text = selectedUnit.Code;
 
-            comboBoxType.SelectedItem = unit.UnitType;
-            if (unit.ManagerId != null)
+            comboBoxType.SelectedItem = selectedUnit.UnitType;
+            if (selectedUnit.ManagerId != null)
             {
-                comboBoxManager.SelectedValue = unit.ManagerId;
+                comboBoxManager.SelectedValue = selectedUnit.ManagerId;
             }
+        }
+
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+            if (selectedUnit is null)
+                return;
+
+            using (var db = new CompanyContext())
+            {
+                var unit = db.OrganizationUnits.Find(selectedUnit.UnitID);
+
+                if (unit == null)
+                    return;
+
+                // Validácia
+                if (string.IsNullOrWhiteSpace(textBoxName.Text))
+                {
+                    MessageBox.Show("Name is required.");
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(textBoxCode.Text))
+                {
+                    MessageBox.Show("Code is required.");
+                    return;
+                }
+
+                unit.Name = textBoxName.Text;
+                unit.Code = textBoxCode.Text;
+                unit.UnitType = (UnitType)comboBoxType.SelectedItem;
+                unit.ManagerId = (int?)comboBoxManager.SelectedValue;
+
+                db.SaveChanges();
+            }
+
+            LoadOrganizationTree();
         }
     }
 }

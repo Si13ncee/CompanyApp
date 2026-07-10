@@ -337,6 +337,7 @@
             buttonSave.TabIndex = 0;
             buttonSave.Text = "Save";
             buttonSave.UseVisualStyleBackColor = true;
+            buttonSave.Click += buttonSave_Click;
             // 
             // buttonDelete
             // 
