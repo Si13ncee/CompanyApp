@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 namespace CompanyApp.Models
 {
     internal class OrganizationUnit
     {
-        public int UnitId { get; set; }
+        [Key]
+        public int UnitID { get; set; }
 
         public string Name { get; set; }
 
@@ -17,5 +19,6 @@ namespace CompanyApp.Models
         public int? ParentId { get; set; }
 
         public int? ManagerId { get; set; }
+        public override string ToString() => Name;        
     }
 }

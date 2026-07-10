@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CompanyApp.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -73,6 +74,19 @@ namespace CompanyApp
         private void tableLayoutPanel1_Paint_1(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void CompanyExplorer_Load(object sender, EventArgs e)
+        {
+                    
+            using (var db = new CompanyContext())
+            {
+                var employees = db.Employees.ToList();
+
+                MessageBox.Show(
+                    $"Počet zamestnancov: {employees.Count}");
+           }
+        
         }
     }
 }

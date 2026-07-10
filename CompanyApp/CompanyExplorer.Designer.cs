@@ -20,6 +20,7 @@
             base.Dispose(disposing);
         }
 
+
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -35,9 +36,6 @@
             splitContainer1 = new SplitContainer();
             splitContainer2 = new SplitContainer();
             OrganisationView = new TreeView();
-            splitContainer3 = new SplitContainer();
-            flowLayoutPanel1 = new FlowLayoutPanel();
-            dataGridView1 = new DataGridView();
             splitContainer4 = new SplitContainer();
             textBox1 = new TextBox();
             splitContainer5 = new SplitContainer();
@@ -54,9 +52,12 @@
             buttonSave = new Button();
             buttonDelete = new Button();
             buttonAddChild = new Button();
+            splitContainer3 = new SplitContainer();
+            flowLayoutPanel1 = new FlowLayoutPanel();
             buttonAddEmp = new Button();
             buttonEditEmp = new Button();
             buttonDeleteEmp = new Button();
+            dataGridView1 = new DataGridView();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
@@ -66,12 +67,6 @@
             splitContainer2.Panel1.SuspendLayout();
             splitContainer2.Panel2.SuspendLayout();
             splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)splitContainer3).BeginInit();
-            splitContainer3.Panel1.SuspendLayout();
-            splitContainer3.Panel2.SuspendLayout();
-            splitContainer3.SuspendLayout();
-            flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)splitContainer4).BeginInit();
             splitContainer4.Panel1.SuspendLayout();
             splitContainer4.Panel2.SuspendLayout();
@@ -82,6 +77,12 @@
             splitContainer5.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer3).BeginInit();
+            splitContainer3.Panel1.SuspendLayout();
+            splitContainer3.Panel2.SuspendLayout();
+            splitContainer3.SuspendLayout();
+            flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -159,47 +160,6 @@
             OrganisationView.Name = "OrganisationView";
             OrganisationView.Size = new Size(250, 250);
             OrganisationView.TabIndex = 0;
-            // 
-            // splitContainer3
-            // 
-            splitContainer3.Dock = DockStyle.Fill;
-            splitContainer3.Location = new Point(0, 0);
-            splitContainer3.Name = "splitContainer3";
-            splitContainer3.Orientation = Orientation.Horizontal;
-            // 
-            // splitContainer3.Panel1
-            // 
-            splitContainer3.Panel1.Controls.Add(flowLayoutPanel1);
-            splitContainer3.Panel1MinSize = 24;
-            // 
-            // splitContainer3.Panel2
-            // 
-            splitContainer3.Panel2.Controls.Add(dataGridView1);
-            splitContainer3.Panel2MinSize = 24;
-            splitContainer3.Size = new Size(800, 172);
-            splitContainer3.SplitterDistance = 24;
-            splitContainer3.TabIndex = 0;
-            // 
-            // flowLayoutPanel1
-            // 
-            flowLayoutPanel1.Controls.Add(buttonAddEmp);
-            flowLayoutPanel1.Controls.Add(buttonEditEmp);
-            flowLayoutPanel1.Controls.Add(buttonDeleteEmp);
-            flowLayoutPanel1.Dock = DockStyle.Fill;
-            flowLayoutPanel1.Location = new Point(0, 0);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(800, 24);
-            flowLayoutPanel1.TabIndex = 0;
-            flowLayoutPanel1.Paint += flowLayoutPanel1_Paint;
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(0, 0);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(800, 144);
-            dataGridView1.TabIndex = 0;
             // 
             // splitContainer4
             // 
@@ -401,6 +361,38 @@
             buttonAddChild.Text = "Add Child";
             buttonAddChild.UseVisualStyleBackColor = true;
             // 
+            // splitContainer3
+            // 
+            splitContainer3.Dock = DockStyle.Fill;
+            splitContainer3.Location = new Point(0, 0);
+            splitContainer3.Name = "splitContainer3";
+            splitContainer3.Orientation = Orientation.Horizontal;
+            // 
+            // splitContainer3.Panel1
+            // 
+            splitContainer3.Panel1.Controls.Add(flowLayoutPanel1);
+            splitContainer3.Panel1MinSize = 24;
+            // 
+            // splitContainer3.Panel2
+            // 
+            splitContainer3.Panel2.Controls.Add(dataGridView1);
+            splitContainer3.Panel2MinSize = 24;
+            splitContainer3.Size = new Size(800, 172);
+            splitContainer3.SplitterDistance = 25;
+            splitContainer3.TabIndex = 0;
+            // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.Controls.Add(buttonAddEmp);
+            flowLayoutPanel1.Controls.Add(buttonEditEmp);
+            flowLayoutPanel1.Controls.Add(buttonDeleteEmp);
+            flowLayoutPanel1.Dock = DockStyle.Fill;
+            flowLayoutPanel1.Location = new Point(0, 0);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(800, 25);
+            flowLayoutPanel1.TabIndex = 0;
+            flowLayoutPanel1.Paint += flowLayoutPanel1_Paint;
+            // 
             // buttonAddEmp
             // 
             buttonAddEmp.Anchor = AnchorStyles.Left;
@@ -437,6 +429,15 @@
             buttonDeleteEmp.Text = "Delete Employee";
             buttonDeleteEmp.UseVisualStyleBackColor = true;
             // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Dock = DockStyle.Fill;
+            dataGridView1.Location = new Point(0, 0);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.Size = new Size(800, 143);
+            dataGridView1.TabIndex = 0;
+            // 
             // CompanyExplorer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -449,6 +450,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "CompanyExplorer";
             WindowState = FormWindowState.Maximized;
+            Load += CompanyExplorer_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             splitContainer1.Panel1.ResumeLayout(false);
@@ -459,13 +461,6 @@
             splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer2).EndInit();
             splitContainer2.ResumeLayout(false);
-            splitContainer3.Panel1.ResumeLayout(false);
-            splitContainer3.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)splitContainer3).EndInit();
-            splitContainer3.ResumeLayout(false);
-            flowLayoutPanel1.ResumeLayout(false);
-            flowLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             splitContainer4.Panel1.ResumeLayout(false);
             splitContainer4.Panel1.PerformLayout();
             splitContainer4.Panel2.ResumeLayout(false);
@@ -479,6 +474,13 @@
             tableLayoutPanel1.PerformLayout();
             flowLayoutPanel2.ResumeLayout(false);
             flowLayoutPanel2.PerformLayout();
+            splitContainer3.Panel1.ResumeLayout(false);
+            splitContainer3.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer3).EndInit();
+            splitContainer3.ResumeLayout(false);
+            flowLayoutPanel1.ResumeLayout(false);
+            flowLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
