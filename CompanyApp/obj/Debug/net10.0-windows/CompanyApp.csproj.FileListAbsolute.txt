@@ -1,0 +1,17 @@
+C:\Praca\Kros\CompanyApp\CompanyApp\bin\Debug\net10.0-windows\CompanyApp.exe
+C:\Praca\Kros\CompanyApp\CompanyApp\bin\Debug\net10.0-windows\CompanyApp.deps.json
+C:\Praca\Kros\CompanyApp\CompanyApp\bin\Debug\net10.0-windows\CompanyApp.runtimeconfig.json
+C:\Praca\Kros\CompanyApp\CompanyApp\bin\Debug\net10.0-windows\CompanyApp.dll
+C:\Praca\Kros\CompanyApp\CompanyApp\bin\Debug\net10.0-windows\CompanyApp.pdb
+C:\Praca\Kros\CompanyApp\CompanyApp\obj\Debug\net10.0-windows\CompanyApp.CompanyExplorer.resources
+C:\Praca\Kros\CompanyApp\CompanyApp\obj\Debug\net10.0-windows\CompanyApp.csproj.GenerateResource.cache
+C:\Praca\Kros\CompanyApp\CompanyApp\obj\Debug\net10.0-windows\CompanyApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Praca\Kros\CompanyApp\CompanyApp\obj\Debug\net10.0-windows\CompanyApp.AssemblyInfoInputs.cache
+C:\Praca\Kros\CompanyApp\CompanyApp\obj\Debug\net10.0-windows\CompanyApp.AssemblyInfo.cs
+C:\Praca\Kros\CompanyApp\CompanyApp\obj\Debug\net10.0-windows\CompanyApp.csproj.CoreCompileInputs.cache
+C:\Praca\Kros\CompanyApp\CompanyApp\obj\Debug\net10.0-windows\CompanyApp.sourcelink.json
+C:\Praca\Kros\CompanyApp\CompanyApp\obj\Debug\net10.0-windows\CompanyApp.dll
+C:\Praca\Kros\CompanyApp\CompanyApp\obj\Debug\net10.0-windows\refint\CompanyApp.dll
+C:\Praca\Kros\CompanyApp\CompanyApp\obj\Debug\net10.0-windows\CompanyApp.pdb
+C:\Praca\Kros\CompanyApp\CompanyApp\obj\Debug\net10.0-windows\CompanyApp.genruntimeconfig.cache
+C:\Praca\Kros\CompanyApp\CompanyApp\obj\Debug\net10.0-windows\ref\CompanyApp.dll
