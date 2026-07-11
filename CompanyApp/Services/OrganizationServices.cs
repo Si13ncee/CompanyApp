@@ -22,13 +22,25 @@ namespace CompanyApp.Services
             return db.OrganizationUnits.Find(id);
         }
 
-        public void Add(OrganizationUnit unit)
+        public OperationResult Add(OrganizationUnit unit)
         {
-            using var db = new CompanyContext();
+            try
+            {
+                using var db = new CompanyContext();
 
-            db.OrganizationUnits.Add(unit);
+                var parent = db.OrganizationUnits.FirstOrDefault(x => x.UnitID == unit.ParentId);
+                unit.UnitType = GetTypeFromParent(parent);
+                Validate(unit);
+                db.OrganizationUnits.Add(unit);
 
-            db.SaveChanges();
+                db.SaveChanges();
+
+                return OperationResult.Ok();
+            }
+            catch (Exception ex)
+            {
+                return OperationResult.Fail(ex.Message);
+            }
         }
 
         public OperationResult Update(OrganizationUnit unit)
@@ -125,9 +137,6 @@ namespace CompanyApp.Services
 
             if (string.IsNullOrWhiteSpace(unit.Code))
                 throw new Exception("Kód jednotky je povinný.");
-
-            if (unit.ManagerId == null)
-                throw new Exception("Jednotka musí mať vedúceho.");
 
             if (GetAll().Any(x => x.Code == unit.Code))
                 throw new Exception("Kód jednotky musí byť unikátny.");

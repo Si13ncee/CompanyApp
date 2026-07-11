@@ -1,7 +1,9 @@
 ﻿using CompanyApp.Data;
+using CompanyApp.Forms;
 using CompanyApp.Models;
 using CompanyApp.Services;
 using CompanyApp.Validation;
+using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -112,7 +114,7 @@ namespace CompanyApp
 
 
             textBoxName.Text = selectedUnit.Name;
-            textBoxCode.Text = selectedUnit.Code;            
+            textBoxCode.Text = selectedUnit.Code;
             comboBoxType.SelectedItem = selectedUnit.UnitType;
             loadParents();
             if (selectedUnit.ManagerId != null)
@@ -220,6 +222,7 @@ namespace CompanyApp
             ClearDetails();
             LoadOrganizationTree();
         }
+
         private void ClearDetails()
         {
             textBoxName.Clear();
@@ -228,6 +231,18 @@ namespace CompanyApp
             comboBoxType.SelectedIndex = -1;
             comboBoxParent.DataSource = null;
             comboBoxManager.DataSource = null;
+        }
+
+        private void buttonAddChild_Click(object sender, EventArgs e)
+        {
+            var parent = selectedUnit;
+            using (var form = new AddOrganizationForm(parent))
+            {
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    LoadOrganizationTree();
+                }
+            }
         }
     }
 }

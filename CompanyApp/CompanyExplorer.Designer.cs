@@ -385,6 +385,7 @@
             buttonAddChild.TabIndex = 2;
             buttonAddChild.Text = "Add Child";
             buttonAddChild.UseVisualStyleBackColor = true;
+            buttonAddChild.Click += buttonAddChild_Click;
             // 
             // splitContainer3
             // 
