@@ -138,7 +138,7 @@ namespace CompanyApp.Services
             if (string.IsNullOrWhiteSpace(unit.Code))
                 throw new Exception("Kód jednotky je povinný.");
 
-            if (GetAll().Any(x => x.Code == unit.Code))
+            if (GetAll().Any(x => x.Code == unit.Code && x.UnitID != unit.UnitID))
                 throw new Exception("Kód jednotky musí byť unikátny.");
 
         }
