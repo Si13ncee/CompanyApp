@@ -70,5 +70,25 @@ namespace CompanyApp.Services
             db.SaveChanges();
             return OperationResult.Ok();
         }
+
+        public int GetSubtreeDepth(OrganizationUnit unit)
+        {
+            var children = GetAll().Where(x => x.ParentId == unit.UnitID).ToList();
+
+            if (!children.Any())
+                return 1;
+
+            return 1 + children.Max(GetSubtreeDepth);
+        }
+
+        public int GetLevel(OrganizationUnit unit)
+        {
+            if (unit.ParentId == null)
+                return 1;
+
+            var parent = GetAll().First(x => x.UnitID == unit.ParentId);
+
+            return 1 + GetLevel(parent);
+        }
     }
 }

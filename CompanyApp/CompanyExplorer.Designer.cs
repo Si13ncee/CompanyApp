@@ -40,14 +40,16 @@
             textBox1 = new TextBox();
             splitContainer5 = new SplitContainer();
             tableLayoutPanel1 = new TableLayoutPanel();
-            textBoxCode = new TextBox();
+            comboBoxParent = new ComboBox();
+            comboBoxManager = new ComboBox();
             labelManager = new Label();
+            textBoxCode = new TextBox();
+            labelParent = new Label();
             labelType = new Label();
             labelCode = new Label();
             labelName = new Label();
             textBoxName = new TextBox();
             comboBoxType = new ComboBox();
-            comboBoxManager = new ComboBox();
             flowLayoutPanel2 = new FlowLayoutPanel();
             buttonSave = new Button();
             buttonDelete = new Button();
@@ -213,52 +215,86 @@
             tableLayoutPanel1.ColumnCount = 2;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.Controls.Add(comboBoxParent, 1, 3);
+            tableLayoutPanel1.Controls.Add(comboBoxManager, 1, 4);
+            tableLayoutPanel1.Controls.Add(labelManager, 0, 4);
             tableLayoutPanel1.Controls.Add(textBoxCode, 1, 1);
-            tableLayoutPanel1.Controls.Add(labelManager, 0, 3);
+            tableLayoutPanel1.Controls.Add(labelParent, 0, 3);
             tableLayoutPanel1.Controls.Add(labelType, 0, 2);
             tableLayoutPanel1.Controls.Add(labelCode, 0, 1);
             tableLayoutPanel1.Controls.Add(labelName, 0, 0);
             tableLayoutPanel1.Controls.Add(textBoxName, 1, 0);
             tableLayoutPanel1.Controls.Add(comboBoxType, 1, 2);
-            tableLayoutPanel1.Controls.Add(comboBoxManager, 1, 3);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.Padding = new Padding(15);
-            tableLayoutPanel1.RowCount = 4;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel1.RowCount = 5;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
             tableLayoutPanel1.Size = new Size(546, 192);
             tableLayoutPanel1.TabIndex = 2;
+            tableLayoutPanel1.Paint += tableLayoutPanel1_Paint_2;
             // 
-            // textBoxCode
+            // comboBoxParent
             // 
-            textBoxCode.Dock = DockStyle.Fill;
-            textBoxCode.Location = new Point(81, 58);
-            textBoxCode.Name = "textBoxCode";
-            textBoxCode.Size = new Size(447, 23);
-            textBoxCode.TabIndex = 8;
+            comboBoxParent.Dock = DockStyle.Fill;
+            comboBoxParent.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxParent.FormattingEnabled = true;
+            comboBoxParent.Location = new Point(81, 114);
+            comboBoxParent.Name = "comboBoxParent";
+            comboBoxParent.Size = new Size(447, 23);
+            comboBoxParent.TabIndex = 14;
+            // 
+            // comboBoxManager
+            // 
+            comboBoxManager.Dock = DockStyle.Fill;
+            comboBoxManager.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxManager.FormattingEnabled = true;
+            comboBoxManager.Location = new Point(81, 146);
+            comboBoxManager.Name = "comboBoxManager";
+            comboBoxManager.Size = new Size(447, 23);
+            comboBoxManager.TabIndex = 13;
             // 
             // labelManager
             // 
             labelManager.Anchor = AnchorStyles.Left;
             labelManager.AutoSize = true;
-            labelManager.Location = new Point(18, 148);
+            labelManager.Location = new Point(18, 152);
             labelManager.Name = "labelManager";
             labelManager.Size = new Size(57, 15);
-            labelManager.TabIndex = 6;
+            labelManager.TabIndex = 11;
             labelManager.Text = "Manager:";
             labelManager.TextAlign = ContentAlignment.MiddleCenter;
+            labelManager.Click += label1_Click_1;
+            // 
+            // textBoxCode
+            // 
+            textBoxCode.Dock = DockStyle.Fill;
+            textBoxCode.Location = new Point(81, 50);
+            textBoxCode.Name = "textBoxCode";
+            textBoxCode.Size = new Size(447, 23);
+            textBoxCode.TabIndex = 8;
+            // 
+            // labelParent
+            // 
+            labelParent.Anchor = AnchorStyles.Left;
+            labelParent.AutoSize = true;
+            labelParent.Location = new Point(18, 119);
+            labelParent.Name = "labelParent";
+            labelParent.Size = new Size(47, 15);
+            labelParent.TabIndex = 6;
+            labelParent.Text = "Parent: ";
+            labelParent.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // labelType
             // 
             labelType.Anchor = AnchorStyles.Left;
             labelType.AutoSize = true;
-            labelType.Location = new Point(18, 107);
+            labelType.Location = new Point(18, 87);
             labelType.Name = "labelType";
             labelType.Size = new Size(34, 15);
             labelType.TabIndex = 4;
@@ -269,7 +305,7 @@
             // 
             labelCode.Anchor = AnchorStyles.Left;
             labelCode.AutoSize = true;
-            labelCode.Location = new Point(18, 67);
+            labelCode.Location = new Point(18, 55);
             labelCode.Name = "labelCode";
             labelCode.Size = new Size(38, 15);
             labelCode.TabIndex = 2;
@@ -280,7 +316,7 @@
             // 
             labelName.Anchor = AnchorStyles.Left;
             labelName.AutoSize = true;
-            labelName.Location = new Point(18, 27);
+            labelName.Location = new Point(18, 23);
             labelName.Name = "labelName";
             labelName.Size = new Size(42, 15);
             labelName.TabIndex = 0;
@@ -300,20 +336,11 @@
             comboBoxType.Dock = DockStyle.Fill;
             comboBoxType.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxType.FormattingEnabled = true;
-            comboBoxType.Location = new Point(81, 98);
+            comboBoxType.Location = new Point(81, 82);
             comboBoxType.Name = "comboBoxType";
             comboBoxType.Size = new Size(447, 23);
             comboBoxType.TabIndex = 9;
-            // 
-            // comboBoxManager
-            // 
-            comboBoxManager.Dock = DockStyle.Fill;
-            comboBoxManager.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxManager.FormattingEnabled = true;
-            comboBoxManager.Location = new Point(81, 138);
-            comboBoxManager.Name = "comboBoxManager";
-            comboBoxManager.Size = new Size(447, 23);
-            comboBoxManager.TabIndex = 10;
+            comboBoxType.SelectedIndexChanged += comboBoxType_SelectedIndexChanged;
             // 
             // flowLayoutPanel2
             // 
@@ -506,13 +533,12 @@
         private SplitContainer splitContainer5;
         private TableLayoutPanel tableLayoutPanel1;
         private TextBox textBoxCode;
-        private Label labelManager;
+        private Label labelParent;
         private Label labelType;
         private Label labelCode;
         private Label labelName;
         private TextBox textBoxName;
         private ComboBox comboBoxType;
-        private ComboBox comboBoxManager;
         private FlowLayoutPanel flowLayoutPanel2;
         private Button buttonSave;
         private Button buttonDelete;
@@ -520,5 +546,8 @@
         private Button buttonAddEmp;
         private Button buttonEditEmp;
         private Button buttonDeleteEmp;
+        private Label labelManager;
+        private ComboBox comboBoxManager;
+        private ComboBox comboBoxParent;
     }
 }

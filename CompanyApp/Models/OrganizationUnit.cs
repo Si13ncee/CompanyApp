@@ -19,6 +19,7 @@ namespace CompanyApp.Models
         public int? ParentId { get; set; }
 
         public int? ManagerId { get; set; }
-        public override string ToString() => Name;        
+        public override string ToString() => Name;
+        public string FullName => $"{Name} ({Code})";
     }
 }

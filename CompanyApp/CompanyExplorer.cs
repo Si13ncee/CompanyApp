@@ -1,9 +1,11 @@
 ﻿using CompanyApp.Data;
 using CompanyApp.Models;
 using CompanyApp.Services;
+using CompanyApp.Validation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -94,6 +96,7 @@ namespace CompanyApp
             LoadManagers(); // loadne všetkých zamestnancov do comboBoxu pre výber
             LoadEmployees();
             LoadOrganizationTree();
+            loadParents();
         }
         private void LoadManagers()
         {
@@ -129,7 +132,7 @@ namespace CompanyApp
 
                 tvOrganization.Nodes.Add(node);
             }
-            
+
         }
         private TreeNode CreateTreeNode(OrganizationUnit unit, List<OrganizationUnit> allUnits)
         {
@@ -157,7 +160,7 @@ namespace CompanyApp
 
             var employees = _employeeService.GetAll();
             dgvEmployees.DataSource = employees;
-            
+
         }
 
         private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
@@ -172,7 +175,7 @@ namespace CompanyApp
 
             textBoxName.Text = selectedUnit.Name;
             textBoxCode.Text = selectedUnit.Code;
-
+            loadParents();
             comboBoxType.SelectedItem = selectedUnit.UnitType;
             if (selectedUnit.ManagerId != null)
             {
@@ -186,15 +189,29 @@ namespace CompanyApp
                 return;
 
             // Validácia
-            if (string.IsNullOrWhiteSpace(textBoxName.Text))
+            if (HierarchyValidator.IsTextBoxFilled(textBoxName))
             {
                 MessageBox.Show("Name is required.");
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(textBoxCode.Text))
+            if (HierarchyValidator.IsTextBoxFilled(textBoxCode))
             {
                 MessageBox.Show("Code is required.");
+                return;
+            }
+
+            var parent = comboBoxParent.SelectedItem as OrganizationUnit;
+            if (parent == null)
+            {
+                MessageBox.Show("Vyberte nadradenú organizačnú jednotku.");
+                return;
+            }
+            int depth = _organizationServices.GetSubtreeDepth(selectedUnit);
+            int level = _organizationServices.GetLevel(parent);
+            if (!HierarchyValidator.isMovable(depth,level))
+            {
+                MessageBox.Show("Presun nie je možný, nakoľko presahuje maximálnu hĺbku štruktúry.");
                 return;
             }
 
@@ -202,6 +219,7 @@ namespace CompanyApp
             selectedUnit.Name = textBoxName.Text;
             selectedUnit.Code = textBoxCode.Text;
             selectedUnit.UnitType = (UnitType)comboBoxType.SelectedItem;
+            selectedUnit.ParentId = (int?)comboBoxParent.SelectedValue;
             selectedUnit.ManagerId = (int?)comboBoxManager.SelectedValue;
 
             var result = _organizationServices.Update(selectedUnit);
@@ -224,6 +242,32 @@ namespace CompanyApp
                 MessageBoxIcon.Information);
 
             LoadOrganizationTree();
+        }
+
+        private void tableLayoutPanel1_Paint_2(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+        private void loadParents()
+        {
+            if (selectedUnit is null)
+                return;
+            var SelectedType = (UnitType)comboBoxType.SelectedItem;
+
+            var units = _organizationServices.GetAll().Where(x => (x.UnitType == SelectedType -1) && selectedUnit.UnitID != x.UnitID).ToList(); ;
+            comboBoxParent.DataSource = units;
+            comboBoxParent.DisplayMember = "FullName";
+            comboBoxParent.ValueMember = "UnitID";
+        }
+
+        private void comboBoxType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loadParents();
         }
     }
 }
