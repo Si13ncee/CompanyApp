@@ -15,8 +15,5 @@ namespace CompanyApp.Validation
         {
             return depth + level <= 4;
         }
-
-        
-
     }
 }

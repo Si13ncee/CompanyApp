@@ -7,7 +7,7 @@ using System.Text;
 
 namespace CompanyApp.Services
 {
-    /* trieda pre obsluhu formulára po stránke organizácie */
+    /* trieda pre komunikáciu formulára s databázou */
     internal class OrganizationServices
     {
         public List<OrganizationUnit> GetAll()
@@ -53,13 +53,21 @@ namespace CompanyApp.Services
                 var units = db.OrganizationUnits.ToList();
                 var parent = units.FirstOrDefault(x => x.UnitID == unit.ParentId);
 
+                try
+                {
+                    existing.UnitType = GetTypeFromParent(parent);
+                }
+                catch (Exception ex)
+                {
+                    return OperationResult.Fail(ex.Message);
+                }
                 existing.Name = unit.Name;
                 existing.Code = unit.Code;
                 existing.UnitType = unit.UnitType;
                 existing.ParentId = unit.ParentId;
                 existing.ManagerId = unit.ManagerId;
-
-                existing.UnitType = GetTypeFromParent(parent);
+                
+                
                 UpdateChildrenTypes(existing, units);
 
                 db.SaveChanges();
@@ -120,6 +128,9 @@ namespace CompanyApp.Services
 
             if (unit.ManagerId == null)
                 throw new Exception("Jednotka musí mať vedúceho.");
+
+            if (GetAll().Any(x => x.Code == unit.Code))
+                throw new Exception("Kód jednotky musí byť unikátny.");
 
         }
 

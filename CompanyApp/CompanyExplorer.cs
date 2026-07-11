@@ -141,16 +141,25 @@ namespace CompanyApp
                 MessageBox.Show(result.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            
 
-            // napĺňame selected unit
-            selectedUnit.Name = textBoxName.Text;
-            selectedUnit.Code = textBoxCode.Text;
-            selectedUnit.UnitType = (UnitType)comboBoxType.SelectedItem;
-            selectedUnit.ParentId = (int?)comboBoxParent.SelectedValue;
-            selectedUnit.ManagerId = (int?)comboBoxManager.SelectedValue;
 
-            result = _organizationServices.Update(selectedUnit);
+            // napĺňame editing unit
+            OrganizationUnit editingUnit = new OrganizationUnit
+            {
+                UnitID = selectedUnit.UnitID,
+                Name = selectedUnit.Name,
+                Code = selectedUnit.Code,
+                UnitType = selectedUnit.UnitType,
+                ParentId = selectedUnit.ParentId,
+                ManagerId = selectedUnit.ManagerId
+            };
+            editingUnit.Name = textBoxName.Text;
+            editingUnit.Code = textBoxCode.Text;
+            editingUnit.UnitType = (UnitType)comboBoxType.SelectedItem;
+            editingUnit.ParentId = (int?)comboBoxParent.SelectedValue;
+            editingUnit.ManagerId = (int?)comboBoxManager.SelectedValue;
+
+            result = _organizationServices.Update(editingUnit);
 
             if (!result.Success)
             {
@@ -159,7 +168,7 @@ namespace CompanyApp
                 return;
             }
 
-            MessageBox.Show("Organization unit saved.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Zmena bola uložená!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             LoadOrganizationTree();
         }

@@ -22,7 +22,7 @@ CREATE TABLE OrganizationUnits
 (
     UnitID INT PRIMARY KEY IDENTITY(1, 1),
     Name NVARCHAR(100) NOT NULL,
-    Code NVARCHAR(20) NOT NULL,
+    Code NVARCHAR(20) UNIQUE NOT NULL,
     UnitType INT NOT NULL,
         CHECK (UnitType IN (1,2,3,4)),
     ParentId INT NULL,
