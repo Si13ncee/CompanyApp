@@ -127,18 +127,20 @@ namespace CompanyApp
                 return;
 
             var parent = comboBoxParent.SelectedItem as OrganizationUnit;
-            if (parent == null)
+            if (parent == null && (int)comboBoxType.SelectedValue > 1)
             {
                 MessageBox.Show("Vyberte nadradenú organizačnú jednotku.");
                 return;
             }
-            int depth = _organizationServices.GetSubtreeDepth(selectedUnit);
-            int level = _organizationServices.GetLevel(parent);
-            if (!HierarchyValidator.isMovable(depth,level))
+
+            var result = _organizationServices.CanMove(selectedUnit, parent);
+            // táto validácia slúži na to, aby sme nemohli spraviť branch, ktorý začína od iného unit type ako 1 (firma)
+            if (!result.Success)
             {
-                MessageBox.Show("Presun nie je možný, nakoľko presahuje maximálnu hĺbku štruktúry.");
+                MessageBox.Show(result.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            
 
             // napĺňame selected unit
             selectedUnit.Name = textBoxName.Text;
@@ -147,24 +149,16 @@ namespace CompanyApp
             selectedUnit.ParentId = (int?)comboBoxParent.SelectedValue;
             selectedUnit.ManagerId = (int?)comboBoxManager.SelectedValue;
 
-            var result = _organizationServices.Update(selectedUnit);
+            result = _organizationServices.Update(selectedUnit);
 
             if (!result.Success)
             {
-                MessageBox.Show(
-                    result.Message,
-                    "Save error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
+                MessageBox.Show(result.Message, "Save error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 return;
             }
 
-            MessageBox.Show(
-                "Organization unit saved.",
-                "Success",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            MessageBox.Show("Organization unit saved.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             LoadOrganizationTree();
         }

@@ -114,5 +114,43 @@ namespace CompanyApp.Services
                 throw new Exception("Jednotka musí mať vedúceho.");
 
         }
+
+        public bool IsChildOf(OrganizationUnit parent, OrganizationUnit possibleChild)
+        {
+            if (possibleChild.ParentId == null)
+                return false;
+
+
+            if (possibleChild.ParentId == parent.UnitID)
+                return true;
+
+
+            var nextParent = GetById(
+                (int)possibleChild.ParentId);
+
+
+            return IsChildOf(parent, nextParent);
+        }
+
+        public OperationResult CanMove(OrganizationUnit unit, OrganizationUnit? newParent)
+        {
+            // presun na root
+            if (newParent == null)
+                return OperationResult.Ok();
+
+            if (IsChildOf(unit, newParent))
+                return OperationResult.Fail("Nemôžeš vložiť túto jednotku do podjetnotky, ktorá jej patrí!");
+
+            int subtreeDepth = GetSubtreeDepth(unit);
+            int parentLevel = GetLevel(newParent);
+
+
+            if (HierarchyValidator.isMovable(subtreeDepth, parentLevel))
+                return OperationResult.Ok();
+            else
+            {
+                return OperationResult.Fail("Takýmto vnorením by si prekročil maximálnu hĺbku štruktúry programu!");
+            }
+        }
     }
 }

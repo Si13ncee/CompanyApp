@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CompanyApp.Models
 {
-    internal class OrganizationUnit
+    public class OrganizationUnit
     {
         [Key]
         public int UnitID { get; set; }

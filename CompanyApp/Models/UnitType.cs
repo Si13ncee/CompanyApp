@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CompanyApp.Models
 {
-    internal enum UnitType
+    public enum UnitType
     {
         Company = 1,
         Division = 2,
