@@ -112,9 +112,9 @@ namespace CompanyApp
 
 
             textBoxName.Text = selectedUnit.Name;
-            textBoxCode.Text = selectedUnit.Code;
-            loadParents();
+            textBoxCode.Text = selectedUnit.Code;            
             comboBoxType.SelectedItem = selectedUnit.UnitType;
+            loadParents();
             if (selectedUnit.ManagerId != null)
             {
                 comboBoxManager.SelectedValue = selectedUnit.ManagerId;
@@ -184,7 +184,7 @@ namespace CompanyApp
             var parentType = (UnitType)((int)SelectedType - 1);
 
             var units = _organizationServices.GetAll().Where(x => (x.UnitType == parentType) && selectedUnit.UnitID != x.UnitID).ToList(); ;
-            comboBoxParent.DataSource = units;                        
+            comboBoxParent.DataSource = units;
             comboBoxParent.DisplayMember = "FullName";
             comboBoxParent.ValueMember = "UnitID";
             if (selectedUnit.ParentId is not null)
@@ -194,6 +194,40 @@ namespace CompanyApp
         private void comboBoxType_SelectedIndexChanged(object sender, EventArgs e)
         {
             loadParents();
+        }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show(
+                "Naozaj chcete odstrániť túto organizačnú jednotku?",
+                "Potvrdenie",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result != DialogResult.Yes)
+                return;
+
+            var deleteResult = _organizationServices.Delete(selectedUnit.UnitID);
+
+            if (!deleteResult.Success)
+            {
+                MessageBox.Show(deleteResult.Message);
+                return;
+            }
+
+            selectedUnit = null;
+
+            ClearDetails();
+            LoadOrganizationTree();
+        }
+        private void ClearDetails()
+        {
+            textBoxName.Clear();
+            textBoxCode.Clear();
+
+            comboBoxType.SelectedIndex = -1;
+            comboBoxParent.DataSource = null;
+            comboBoxManager.DataSource = null;
         }
     }
 }

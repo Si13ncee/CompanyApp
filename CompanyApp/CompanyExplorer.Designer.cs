@@ -372,6 +372,7 @@
             buttonDelete.TabIndex = 1;
             buttonDelete.Text = "Delete";
             buttonDelete.UseVisualStyleBackColor = true;
+            buttonDelete.Click += buttonDelete_Click;
             // 
             // buttonAddChild
             // 
