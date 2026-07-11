@@ -43,20 +43,28 @@ namespace CompanyApp.Services
                 return OperationResult.Fail(ex.Message);
             }
 
-            using var db = new CompanyContext();
+            using (var db = new CompanyContext())
+            {
+                var existing = db.OrganizationUnits.FirstOrDefault(u => u.UnitID == unit.UnitID);
 
-            var existing = db.OrganizationUnits.FirstOrDefault(u => u.UnitID == unit.UnitID);
+                if (existing == null)
+                    return OperationResult.Fail("Organizáciu sa nepodarilo nájsť.");
 
-            if (existing == null)
-                return OperationResult.Fail("Organizáciu sa nepodarilo nájsť.");
+                var units = db.OrganizationUnits.ToList();
+                var parent = units.FirstOrDefault(x => x.UnitID == unit.ParentId);
 
-            existing.Name = unit.Name;
-            existing.Code = unit.Code;
-            existing.UnitType = unit.UnitType;
-            existing.ParentId = unit.ParentId;
-            existing.ManagerId = unit.ManagerId;
+                existing.Name = unit.Name;
+                existing.Code = unit.Code;
+                existing.UnitType = unit.UnitType;
+                existing.ParentId = unit.ParentId;
+                existing.ManagerId = unit.ManagerId;
 
-            db.SaveChanges();
+                existing.UnitType = GetTypeFromParent(parent);
+                UpdateChildrenTypes(existing, units);
+
+                db.SaveChanges();
+            }
+                
             return OperationResult.Ok();
         }
 
@@ -151,6 +159,31 @@ namespace CompanyApp.Services
             {
                 return OperationResult.Fail("Takýmto vnorením by si prekročil maximálnu hĺbku štruktúry programu!");
             }
+        }
+
+        private void UpdateChildrenTypes(OrganizationUnit parent, List<OrganizationUnit> units)
+        {
+            var children = units.Where(x => x.ParentId == parent.UnitID).ToList();
+
+
+            foreach (var child in children)
+            {
+                child.UnitType = (UnitType)((int)parent.UnitType + 1);
+                UpdateChildrenTypes(child, units);
+            }
+        }
+
+        private UnitType GetTypeFromParent(OrganizationUnit? parent)
+        {
+            if (parent == null)
+                return UnitType.Company;
+
+
+            if (parent.UnitType == UnitType.Department)
+                throw new Exception("Department nemôže mať podriadenú jednotku.");
+
+
+            return (UnitType)((int)parent.UnitType + 1);
         }
     }
 }

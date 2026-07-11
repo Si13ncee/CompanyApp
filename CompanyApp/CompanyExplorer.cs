@@ -133,8 +133,9 @@ namespace CompanyApp
                 return;
             }
 
-            var result = _organizationServices.CanMove(selectedUnit, parent);
+
             // táto validácia slúži na to, aby sme nemohli spraviť branch, ktorý začína od iného unit type ako 1 (firma)
+            var result = _organizationServices.CanMove(selectedUnit, parent);
             if (!result.Success)
             {
                 MessageBox.Show(result.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
