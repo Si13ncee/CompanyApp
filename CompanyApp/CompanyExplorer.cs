@@ -29,66 +29,6 @@ namespace CompanyApp
             _employeeService = new EmployeeServices();
         }
 
-        private void splitContainer2_Panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void splitContainer2_Panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void toolStripMenuItem3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void splitContainer2_Panel2_Paint_1(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void buttonAddChild_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tableLayoutPanel1_Paint_1(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void CompanyExplorer_Load(object sender, EventArgs e)
         {
 
@@ -108,6 +48,7 @@ namespace CompanyApp
             comboBoxManager.ValueMember = "EmployeeId";
 
         }
+
         private void LoadUnitTypes()
         {
             comboBoxType.DataSource = Enum.GetValues(typeof(UnitType));
@@ -134,6 +75,7 @@ namespace CompanyApp
             }
 
         }
+
         private TreeNode CreateTreeNode(OrganizationUnit unit, List<OrganizationUnit> allUnits)
         {
             TreeNode node = new TreeNode($"{unit.Name} ({unit.Code})");
@@ -154,17 +96,13 @@ namespace CompanyApp
 
             return node;
         }
+
         private void LoadEmployees()
         {
 
 
             var employees = _employeeService.GetAll();
             dgvEmployees.DataSource = employees;
-
-        }
-
-        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
 
         }
 
@@ -187,19 +125,6 @@ namespace CompanyApp
         {
             if (selectedUnit is null)
                 return;
-
-            // Validácia
-            if (HierarchyValidator.IsTextBoxFilled(textBoxName))
-            {
-                MessageBox.Show("Name is required.");
-                return;
-            }
-
-            if (HierarchyValidator.IsTextBoxFilled(textBoxCode))
-            {
-                MessageBox.Show("Code is required.");
-                return;
-            }
 
             var parent = comboBoxParent.SelectedItem as OrganizationUnit;
             if (parent == null)
@@ -244,25 +169,22 @@ namespace CompanyApp
             LoadOrganizationTree();
         }
 
-        private void tableLayoutPanel1_Paint_2(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
-        }
+        /* Metóda na načítanie všetkých možných prvkov, 
+         * ktoré môžu byť ako parent pre aktuálne zvolený typ jednotky.
+         */
         private void loadParents()
         {
             if (selectedUnit is null)
                 return;
             var SelectedType = (UnitType)comboBoxType.SelectedItem;
+            var parentType = (UnitType)((int)SelectedType - 1);
 
-            var units = _organizationServices.GetAll().Where(x => (x.UnitType == SelectedType -1) && selectedUnit.UnitID != x.UnitID).ToList(); ;
-            comboBoxParent.DataSource = units;
+            var units = _organizationServices.GetAll().Where(x => (x.UnitType == parentType) && selectedUnit.UnitID != x.UnitID).ToList(); ;
+            comboBoxParent.DataSource = units;                        
             comboBoxParent.DisplayMember = "FullName";
             comboBoxParent.ValueMember = "UnitID";
+            if (selectedUnit.ParentId is not null)
+                comboBoxParent.SelectedValue = selectedUnit.ParentId;
         }
 
         private void comboBoxType_SelectedIndexChanged(object sender, EventArgs e)

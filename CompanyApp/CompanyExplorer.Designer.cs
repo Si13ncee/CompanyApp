@@ -95,7 +95,6 @@
             menuStrip1.Size = new Size(800, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
-            menuStrip1.ItemClicked += menuStrip1_ItemClicked;
             // 
             // FileBTN
             // 
@@ -114,7 +113,6 @@
             HelpBTN.Name = "HelpBTN";
             HelpBTN.Size = new Size(44, 20);
             HelpBTN.Text = "Help";
-            HelpBTN.Click += toolStripMenuItem3_Click;
             // 
             // splitContainer1
             // 
@@ -149,7 +147,6 @@
             // splitContainer2.Panel2
             // 
             splitContainer2.Panel2.Controls.Add(splitContainer4);
-            splitContainer2.Panel2.Paint += splitContainer2_Panel2_Paint_1;
             splitContainer2.Size = new Size(800, 250);
             splitContainer2.SplitterDistance = 250;
             splitContainer2.TabIndex = 0;
@@ -237,7 +234,6 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
             tableLayoutPanel1.Size = new Size(546, 192);
             tableLayoutPanel1.TabIndex = 2;
-            tableLayoutPanel1.Paint += tableLayoutPanel1_Paint_2;
             // 
             // comboBoxParent
             // 
@@ -269,7 +265,6 @@
             labelManager.TabIndex = 11;
             labelManager.Text = "Manager:";
             labelManager.TextAlign = ContentAlignment.MiddleCenter;
-            labelManager.Click += label1_Click_1;
             // 
             // textBoxCode
             // 
@@ -420,7 +415,6 @@
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(800, 25);
             flowLayoutPanel1.TabIndex = 0;
-            flowLayoutPanel1.Paint += flowLayoutPanel1_Paint;
             // 
             // buttonAddEmp
             // 
@@ -467,7 +461,6 @@
             dgvEmployees.Name = "dgvEmployees";
             dgvEmployees.Size = new Size(800, 143);
             dgvEmployees.TabIndex = 0;
-            dgvEmployees.CellContentClick += dataGridView1_CellContentClick_1;
             // 
             // CompanyExplorer
             // 

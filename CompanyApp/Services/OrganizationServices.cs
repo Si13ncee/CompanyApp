@@ -1,5 +1,6 @@
 ﻿using CompanyApp.Data;
 using CompanyApp.Models;
+using CompanyApp.Validation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -32,6 +33,16 @@ namespace CompanyApp.Services
 
         public OperationResult Update(OrganizationUnit unit)
         {
+            // Validácia
+            try
+            {
+                Validate(unit);
+            }
+            catch (Exception ex)
+            {
+                return OperationResult.Fail(ex.Message);
+            }
+
             using var db = new CompanyContext();
 
             var existing = db.OrganizationUnits.FirstOrDefault(u => u.UnitID == unit.UnitID);
@@ -89,6 +100,19 @@ namespace CompanyApp.Services
             var parent = GetAll().First(x => x.UnitID == unit.ParentId);
 
             return 1 + GetLevel(parent);
+        }
+
+        private void Validate(OrganizationUnit unit)
+        {
+            if (string.IsNullOrWhiteSpace(unit.Name))
+                throw new Exception("Názov jednotky je povinný.");
+
+            if (string.IsNullOrWhiteSpace(unit.Code))
+                throw new Exception("Kód jednotky je povinný.");
+
+            if (unit.ManagerId == null)
+                throw new Exception("Jednotka musí mať vedúceho.");
+
         }
     }
 }
