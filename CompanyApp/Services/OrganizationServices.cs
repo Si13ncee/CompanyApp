@@ -141,6 +141,12 @@ namespace CompanyApp.Services
             if (GetAll().Any(x => x.Code == unit.Code && x.UnitID != unit.UnitID))
                 throw new Exception("Kód jednotky musí byť unikátny.");
 
+            if (unit.ManagerId == null)
+            {
+                throw new Exception("Organizačná jednotka musí mať vedúceho.");
+                    
+            }
+
         }
 
         public bool IsChildOf(OrganizationUnit parent, OrganizationUnit possibleChild)
