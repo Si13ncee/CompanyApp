@@ -7,12 +7,9 @@ namespace CompanyApp.Validation
 {
     public static class HierarchyValidator
     {
-        public static bool IsTextBoxFilled(TextBox box) {
-            return string.IsNullOrWhiteSpace(box.Text);
-        }
-
         internal static bool isMovable(int depth, int level)
         {
+            // 4 -> maximálna povolená hĺbka stromu
             return depth + level <= 4;
         }
     }

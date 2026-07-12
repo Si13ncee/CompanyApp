@@ -34,7 +34,7 @@ namespace CompanyApp
         private void CompanyExplorer_Load(object sender, EventArgs e)
         {
 
-            LoadUnitTypes(); // loaduje enum typov pre OrganizationUnits           
+            LoadUnitTypes();     
             LoadOrganizationTree();
             loadParents();
             LoadEmployees();
@@ -78,9 +78,10 @@ namespace CompanyApp
             comboBoxType.DataSource = Enum.GetValues(typeof(UnitType));
         }
 
+        // metóda slúži na načítanie celého hierarchického stromu.
         private void LoadOrganizationTree()
         {
-
+            // uloženie rozloženia predošlého stavu stromu, aby sme ho mohli ponechať rovnako roztvorený po reloade
             var expandedNodes = GetExpandedNodes();
             var units = _organizationServices.GetAll();
 
@@ -96,6 +97,7 @@ namespace CompanyApp
 
                 tvOrganization.Nodes.Add(node);
             }
+            
             RestoreExpandedNodes(expandedNodes);
 
         }
@@ -324,9 +326,9 @@ namespace CompanyApp
             foreach (DataGridViewRow row in selectedRows)
             {
                 int id = (int)row.Cells["EmployeeId"].Value;
-
                 employeeIds.Add(id);
             }
+
             var result = MessageBox.Show(
                     $"Naozaj chcete odstrániť {employeeIds.Count} zamestnancov?",
                     "Potvrdenie mazania",
@@ -363,7 +365,6 @@ namespace CompanyApp
             }
 
             var row = dgvEmployees.SelectedRows[0];
-
             var employee = (Employee)dgvEmployees.SelectedRows[0].DataBoundItem;
 
             using (var form = new EditEmployeeForm(employee))
@@ -373,8 +374,6 @@ namespace CompanyApp
                     LoadEmployees();
                 }
             }
-
-
         }
 
         private void dgvEmployees_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -382,6 +381,10 @@ namespace CompanyApp
             buttonEditEmp_Click(null, null);
         }
 
+        /// <summary>
+        /// Získa identifikátory všetkých aktuálne rozbalených uzlov v organizačnom strome.
+        /// Používa sa na zachovanie stavu TreeView pri opätovnom načítaní dát.
+        /// </summary>
         private HashSet<int> GetExpandedNodes()
         {
             var expandedNodes = new HashSet<int>();
@@ -394,6 +397,9 @@ namespace CompanyApp
             return expandedNodes;
         }
 
+        /// <summary>
+        /// Rekurzívne prechádza strom a ukladá ID všetkých rozbalených organizačných jednotiek.
+        /// </summary>
         private void SaveExpandedNodes(TreeNode node, HashSet<int> expandedNodes)
         {
             if (node.IsExpanded && node.Tag is OrganizationUnit unit)
@@ -407,6 +413,9 @@ namespace CompanyApp
             }
         }
 
+        /// <summary>
+        /// Obnoví stav rozbalenia organizačného stromu podľa uložených ID uzlov.
+        /// </summary>
         private void RestoreExpandedNodes(HashSet<int> expandedNodes)
         {
             foreach (TreeNode node in tvOrganization.Nodes)
@@ -415,6 +424,9 @@ namespace CompanyApp
             }
         }
 
+        /// <summary>
+        /// Rekurzívne prechádza strom a rozbaľuje uzly, ktoré boli pred refreshom otvorené.
+        /// </summary>
         private void RestoreNode(TreeNode node, HashSet<int> expandedNodes)
         {
             if (node.Tag is OrganizationUnit unit &&

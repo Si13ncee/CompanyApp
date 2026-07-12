@@ -44,8 +44,7 @@ namespace CompanyApp.Services
             try
             {
                 ValidateEmployeeUnit(employee);
-                Validate(employee);
-                
+                Validate(employee);                
             }
             catch (Exception ex)
             {
@@ -53,12 +52,10 @@ namespace CompanyApp.Services
             }
 
             using var db = new CompanyContext();
-
             var existing = db.Employees.Find(employee.EmployeeId);
  
             if (existing == null)
                 return OperationResult.Fail("Tento zamestnanec neexistuje v databáze.");
-
             
             existing.Title = employee.Title;
             existing.FirstName = employee.FirstName;
@@ -131,7 +128,7 @@ namespace CompanyApp.Services
                 .Replace(")", "");
 
 
-            // slovenský formát 0900xxxxxx
+            // slovenský formát 0900xxxxxx prehodí na +421
             if (phone.StartsWith("0"))
             {
                 phone = "+421" + phone.Substring(1);

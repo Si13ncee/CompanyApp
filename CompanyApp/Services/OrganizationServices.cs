@@ -28,6 +28,7 @@ namespace CompanyApp.Services
             {
                 using var db = new CompanyContext();
 
+
                 var parent = db.OrganizationUnits.FirstOrDefault(x => x.UnitID == unit.ParentId);
                 unit.UnitType = GetTypeFromParent(parent);
                 Validate(unit);
@@ -111,6 +112,9 @@ namespace CompanyApp.Services
             return OperationResult.Ok();
         }
 
+        /// <summary>
+        /// Vypočíta maximálnu hĺbku podstromu danej organizačnej jednotky.
+        /// </summary>
         public int GetSubtreeDepth(OrganizationUnit unit)
         {
             var children = GetAll().Where(x => x.ParentId == unit.UnitID).ToList();
@@ -121,6 +125,9 @@ namespace CompanyApp.Services
             return 1 + children.Max(GetSubtreeDepth);
         }
 
+        /// <summary>
+        /// Metóda získa level passnutej unit
+        /// </summary>
         public int GetLevel(OrganizationUnit unit)
         {
             if (unit.ParentId == null)
@@ -131,6 +138,9 @@ namespace CompanyApp.Services
             return 1 + GetLevel(parent);
         }
 
+        /// <summary>
+        /// Metóda prejde všetky vypísané validačné podmienky pre OrganizationUnit, ktorý do nej vchádza ako parameter
+        /// </summary>
         private void Validate(OrganizationUnit unit)
         {
             if (string.IsNullOrWhiteSpace(unit.Name))
@@ -168,6 +178,7 @@ namespace CompanyApp.Services
             return IsChildOf(parent, nextParent);
         }
 
+        // Kontrola zabezpečuje, že presunutím jednotky nevznikne hierarchia hlbšia ako povolené 4 úrovne.
         public OperationResult CanMove(OrganizationUnit unit, OrganizationUnit? newParent)
         {
             // presun na root
@@ -180,7 +191,7 @@ namespace CompanyApp.Services
             int subtreeDepth = GetSubtreeDepth(unit);
             int parentLevel = GetLevel(newParent);
 
-
+            // v tejto podmienke sa kontroluje maximálna hĺbka
             if (HierarchyValidator.isMovable(subtreeDepth, parentLevel))
                 return OperationResult.Ok();
             else
