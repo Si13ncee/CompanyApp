@@ -164,7 +164,9 @@ namespace CompanyApp
             var parent = comboBoxParent.SelectedItem as OrganizationUnit;
             if (parent == null && (int)comboBoxType.SelectedValue > 1)
             {
-                MessageBox.Show("Vyberte nadradenú organizačnú jednotku.");
+                MessageBox.Show("Vyberte nadradenú organizačnú jednotku.", "Upozornenie",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
                 return;
             }
 
@@ -272,7 +274,9 @@ namespace CompanyApp
 
             if (!deleteResult.Success)
             {
-                MessageBox.Show(deleteResult.Message);
+                MessageBox.Show(deleteResult.Message, "Upozornenie",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
                 return;
             }
 
@@ -320,7 +324,10 @@ namespace CompanyApp
             if (selectedRows.Count == 0)
             {
                 MessageBox.Show(
-                    "Vyberte aspoň jedného zamestnanca.");
+                    "Vyberte aspoň jedného zamestnanca.",
+                    "Upozornenie",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
                 return;
             }
             List<int> employeeIds = new();
@@ -346,7 +353,10 @@ namespace CompanyApp
 
                 if (!deleteResult.Success)
                 {
-                    MessageBox.Show(deleteResult.Message);
+                    MessageBox.Show(deleteResult.Message, 
+                        "Upozornenie",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
                 }
             }
             LoadEmployees();
@@ -356,7 +366,10 @@ namespace CompanyApp
         {
             if (dgvEmployees.SelectedRows.Count != 1)
             {
-                MessageBox.Show("Pre úpravu vyberte presne jedného zamestnanca.");
+                MessageBox.Show("Pre úpravu vyberte presne jedného zamestnanca.", 
+                    "Upozornenie",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
                 return;
             }
 

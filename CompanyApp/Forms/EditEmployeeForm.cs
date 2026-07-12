@@ -70,7 +70,9 @@ namespace CompanyApp.Forms
 
             if (!result.Success)
             {
-                MessageBox.Show(result.Message);
+                MessageBox.Show(result.Message, "Upozornenie",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
                 return;
             }
             DialogResult = DialogResult.OK;

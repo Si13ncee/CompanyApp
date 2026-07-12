@@ -43,5 +43,6 @@ ADD UnitID INT NULL;
 ALTER TABLE Employees
 ADD CONSTRAINT FK_Employee_OrganizationUnit
 FOREIGN KEY (UnitID)
-REFERENCES OrganizationUnits(UnitID);
+REFERENCES OrganizationUnits(UnitID)
+ON DELETE SET NULL;
 
