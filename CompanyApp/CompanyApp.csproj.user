@@ -4,6 +4,9 @@
     <Compile Update="CompanyExplorer.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\AddEmployeeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\AddOrganizationForm.cs">
       <SubType>Form</SubType>
     </Compile>

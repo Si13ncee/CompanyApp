@@ -102,7 +102,6 @@ namespace CompanyApp
         private void LoadEmployees()
         {
 
-
             var employees = _employeeService.GetAll();
             dgvEmployees.DataSource = employees;
 
@@ -243,6 +242,15 @@ namespace CompanyApp
                     LoadOrganizationTree();
                 }
             }
+        }
+
+        private void buttonAddEmp_Click(object sender, EventArgs e)
+        {
+            using (var form = new AddEmployeeForm(selectedUnit))
+            {
+                form.ShowDialog();
+            }
+            LoadEmployees();
         }
     }
 }

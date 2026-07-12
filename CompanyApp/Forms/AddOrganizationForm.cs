@@ -77,6 +77,7 @@ namespace CompanyApp.Forms
                 return;
             comboBoxType.SelectedItem = parent.UnitType + 1;
         }
+
         private void comboBoxType_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadParents();

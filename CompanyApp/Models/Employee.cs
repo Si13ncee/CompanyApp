@@ -18,9 +18,13 @@ namespace CompanyApp.Models
 
         public string? Phone { get; set; }
 
-        public string? Email { get; set; }
+        public string Email { get; set; }
 
         public override string ToString() => $"{FirstName} {LastName}";
         public string FullName => string.IsNullOrWhiteSpace(Title) ? $"{FirstName} {LastName}" : $"{Title} {FirstName} {LastName}";
+
+        public int? UnitID { get; set; }
+
+        public OrganizationUnit? Unit { get; set; }
     }
 }

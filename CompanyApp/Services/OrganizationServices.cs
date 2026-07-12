@@ -104,6 +104,14 @@ namespace CompanyApp.Services
                 return OperationResult.Fail("Zmazanie sa nepodarilo nakoľko organizácia obsahuje podčlenov.");
             }
 
+            bool hasEmployees = db.Employees.Any(e => e.UnitID == id);
+
+            if (hasEmployees)
+            {
+                return OperationResult.Fail(
+                    "Nie je možné odstrániť organizačnú jednotku, pretože obsahuje zamestnancov.");
+            }
+
             db.OrganizationUnits.Remove(unit);
 
             db.SaveChanges();

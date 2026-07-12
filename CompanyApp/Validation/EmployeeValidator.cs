@@ -2,22 +2,20 @@
 using System.Collections.Generic;
 using System.Net.Mail;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace CompanyApp.Validation
 {
     public static class EmployeeValidator
     {
-        static bool IsValidEmail(string email)
+        public static bool IsValidEmail(string email)
         {
-            try
-            {
-                var address = new MailAddress(email);
-                return true;
-            }
-            catch
-            {
+            if (string.IsNullOrWhiteSpace(email))
                 return false;
-            }
+
+            return Regex.IsMatch(
+                email,
+                @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
         }
     }
 }

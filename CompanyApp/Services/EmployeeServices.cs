@@ -1,5 +1,6 @@
 ﻿using CompanyApp.Data;
 using CompanyApp.Models;
+using CompanyApp.Validation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,11 +21,21 @@ namespace CompanyApp.Services
             return db.Employees.Find(id);
         }
 
-        public void Add(Employee employee)
+        public OperationResult Add(Employee employee)
         {
-            using var db = new CompanyContext();
-            db.Employees.Add(employee);
-            db.SaveChanges();
+            try
+            {
+                using var db = new CompanyContext();
+                Validate(employee);
+                db.Employees.Add(employee);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return OperationResult.Fail(ex.Message);
+            }
+            return OperationResult.Ok();
+            
         }
 
         public void Update(Employee employee)
@@ -62,6 +73,21 @@ namespace CompanyApp.Services
             using var db = new CompanyContext();
 
             return db.Employees.Any(x => x.EmployeeId == id);
+        }
+
+        private void Validate(Employee emp)
+        {
+            if (string.IsNullOrWhiteSpace(emp.FirstName))
+                throw new Exception("Zamestnanec musí mať meno!");
+
+            if (string.IsNullOrWhiteSpace(emp.LastName))
+                throw new Exception("Zamestnanec musí mať priezvisko!");
+
+            if (!EmployeeValidator.IsValidEmail(emp.Email))
+                throw new Exception($"Invalid email: {emp.Email}");
+
+            if (emp.UnitID == null)
+                throw new Exception("Oddelenie je povinné.");
         }
     }
 }

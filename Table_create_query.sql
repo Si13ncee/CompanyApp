@@ -8,7 +8,7 @@ CREATE TABLE Employees
     FirstName NVARCHAR(50) NOT NULL,
     LastName NVARCHAR(50) NOT NULL,
     Phone NVARCHAR(20),
-    Email NVARCHAR(100)
+    Email NVARCHAR(100) NOT NULL
 )
 
 /* Vytvorenie tabuľky OrganizationUnit
@@ -36,3 +36,11 @@ CREATE TABLE OrganizationUnits
         FOREIGN KEY (ManagerId)
         REFERENCES Employees(EmployeeId)
 )
+
+ALTER TABLE Employees
+ADD UnitID INT NULL;
+
+ALTER TABLE Employees
+ADD CONSTRAINT FK_Employee_OrganizationUnit
+FOREIGN KEY (UnitID)
+REFERENCES OrganizationUnits(UnitID);
