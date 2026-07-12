@@ -28,5 +28,7 @@ namespace CompanyApp.Models
 
         [NotMapped]
         public string DepartmentName { get; set; }
+        [NotMapped]
+        public string Position { get; set; }
     }
 }

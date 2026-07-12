@@ -46,10 +46,8 @@ namespace CompanyApp
             var units = _organizationServices.GetAll();
 
             var managerIds = units.Where(x => x.ManagerId != null).Select(x => x.ManagerId).ToList();
-
-
-            var availableManagers = employees.Where(x => !managerIds.Contains(x.EmployeeId)).ToList();
-
+            // iba zamestnanci z daného oddelenia a ktorí ešte nie sú manažéri
+            var availableManagers = employees.Where(x => x.UnitID == selectedUnit.UnitID && !managerIds.Contains(x.EmployeeId)).ToList();
 
             if (currentManagerId is not null)
             {
@@ -83,6 +81,7 @@ namespace CompanyApp
         private void LoadOrganizationTree()
         {
 
+            var expandedNodes = GetExpandedNodes();
             var units = _organizationServices.GetAll();
 
             tvOrganization.Nodes.Clear();
@@ -99,6 +98,7 @@ namespace CompanyApp
 
                 tvOrganization.Nodes.Add(node);
             }
+            RestoreExpandedNodes(expandedNodes);
 
         }
 
@@ -134,6 +134,7 @@ namespace CompanyApp
                 employee.DepartmentName = units
                     .FirstOrDefault(u => u.UnitID == employee.UnitID)?
                     .Name ?? "";
+                employee.Position = units.Any(x => x.ManagerId == employee.EmployeeId) ? "Vedúci" : "Zamestnanec";
             }
 
             dgvEmployees.DataSource = employees;
@@ -208,6 +209,7 @@ namespace CompanyApp
             MessageBox.Show("Zmena bola uložená!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             LoadOrganizationTree();
+            LoadEmployees();
         }
 
         /* Metóda na načítanie všetkých možných prvkov, 
@@ -284,6 +286,7 @@ namespace CompanyApp
 
             ClearDetails();
             LoadOrganizationTree();
+            LoadEmployees();
         }
 
         private void ClearDetails()
@@ -391,6 +394,53 @@ namespace CompanyApp
         private void dgvEmployees_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             buttonEditEmp_Click(null, null);
+        }
+
+        private HashSet<int> GetExpandedNodes()
+        {
+            var expandedNodes = new HashSet<int>();
+
+            foreach (TreeNode node in tvOrganization.Nodes)
+            {
+                SaveExpandedNodes(node, expandedNodes);
+            }
+
+            return expandedNodes;
+        }
+
+        private void SaveExpandedNodes(TreeNode node, HashSet<int> expandedNodes)
+        {
+            if (node.IsExpanded && node.Tag is OrganizationUnit unit)
+            {
+                expandedNodes.Add(unit.UnitID);
+            }
+
+            foreach (TreeNode child in node.Nodes)
+            {
+                SaveExpandedNodes(child, expandedNodes);
+            }
+        }
+
+        private void RestoreExpandedNodes(HashSet<int> expandedNodes)
+        {
+            foreach (TreeNode node in tvOrganization.Nodes)
+            {
+                RestoreNode(node, expandedNodes);
+            }
+        }
+
+        private void RestoreNode(TreeNode node, HashSet<int> expandedNodes)
+        {
+            if (node.Tag is OrganizationUnit unit &&
+                expandedNodes.Contains(unit.UnitID))
+            {
+                node.Expand();
+            }
+
+            foreach (TreeNode child in node.Nodes)
+            {
+                RestoreNode(child, expandedNodes);
+            }
         }
     }
 }
