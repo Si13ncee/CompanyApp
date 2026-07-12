@@ -87,9 +87,7 @@ namespace CompanyApp
             tvOrganization.Nodes.Clear();
 
             // Vytiahneme z listu organizačnej štruktúry firmy prvky, ktoré nemajú parentID -> korene stromov.
-            var rootUnits = units
-                .Where(x => x.ParentId == null)
-                .ToList();
+            var rootUnits = units.Where(x => x.ParentId == null).ToList();
 
             // Pridruží koreňom všetky ich potomkov/branches.
             foreach (var unit in rootUnits)
@@ -105,21 +103,14 @@ namespace CompanyApp
         private TreeNode CreateTreeNode(OrganizationUnit unit, List<OrganizationUnit> allUnits)
         {
             TreeNode node = new TreeNode($"{unit.Name} ({unit.Code})");
-
             node.Tag = unit;
-
-
-            var children = allUnits
-                .Where(x => x.ParentId == unit.UnitID)
-                .ToList();
+            var children = allUnits.Where(x => x.ParentId == unit.UnitID).ToList();
 
             // rekurzívne vytvára branche pre jednotlivé položky, až kým sa nedostane na list.
             foreach (var child in children)
             {
                 node.Nodes.Add(CreateTreeNode(child, allUnits));
             }
-
-
             return node;
         }
 
@@ -128,12 +119,9 @@ namespace CompanyApp
 
             var employees = _employeeService.GetAll();
             var units = _organizationServices.GetAll();
-
             foreach (var employee in employees)
             {
-                employee.DepartmentName = units
-                    .FirstOrDefault(u => u.UnitID == employee.UnitID)?
-                    .Name ?? "";
+                employee.DepartmentName = units.FirstOrDefault(u => u.UnitID == employee.UnitID)?.Name ?? "";
                 employee.Position = units.Any(x => x.ManagerId == employee.EmployeeId) ? "Vedúci" : "Zamestnanec";
             }
 
@@ -144,8 +132,6 @@ namespace CompanyApp
         private void tvOrganization_AfterSelect(object sender, TreeViewEventArgs e)
         {
             selectedUnit = (OrganizationUnit)e.Node.Tag;
-
-
             textBoxName.Text = selectedUnit.Name;
             textBoxCode.Text = selectedUnit.Code;
             comboBoxType.SelectedItem = selectedUnit.UnitType;

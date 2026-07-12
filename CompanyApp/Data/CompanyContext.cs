@@ -16,12 +16,7 @@ namespace CompanyApp.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var connectionString =
-                ConfigurationManager
-                .ConnectionStrings["CompanyDB"]
-                .ConnectionString;
-
-
+            var connectionString = ConfigurationManager.ConnectionStrings["CompanyDB"].ConnectionString;
             optionsBuilder.UseSqlServer(connectionString);
         }
     }

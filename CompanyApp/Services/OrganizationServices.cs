@@ -221,10 +221,7 @@ namespace CompanyApp.Services
 
             using var db = new CompanyContext();
 
-            var alreadyManaged = db.OrganizationUnits
-                .Any(x =>
-                    x.ManagerId == unit.ManagerId &&
-                    x.UnitID != unit.UnitID);
+            var alreadyManaged = db.OrganizationUnits.Any(x => x.ManagerId == unit.ManagerId && x.UnitID != unit.UnitID);
 
             if (alreadyManaged)
             {

@@ -70,14 +70,9 @@ namespace CompanyApp.Forms
             var units = _organizationService.GetAll();
             var managerIds = units.Where(x => x.ManagerId != null).Select(x => x.ManagerId).ToList();
 
-
             var availableManagers = employees.Where(x => !managerIds.Contains(x.EmployeeId)).ToList();
 
-
             comboBoxManager.DataSource = availableManagers;
-
-
-
             comboBoxManager.DisplayMember = "FullName";
             comboBoxManager.ValueMember = "EmployeeId";
         }

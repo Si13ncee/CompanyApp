@@ -82,8 +82,7 @@ namespace CompanyApp.Services
 
             if (isManager)
             {
-                return OperationResult.Fail(
-                    $"Zamestnanec {employee.FullName} je vedúcim organizačnej jednotky. Nemôžeš ho zmazať.");
+                return OperationResult.Fail($"Zamestnanec {employee.FullName} je vedúcim organizačnej jednotky. Nemôžeš ho zmazať.");
             }
 
             db.Employees.Remove(employee);
@@ -108,16 +107,14 @@ namespace CompanyApp.Services
         {
             using var db = new CompanyContext();
 
-            var managedUnit = db.OrganizationUnits
-                .FirstOrDefault(x => x.ManagerId == employee.EmployeeId);
+            var managedUnit = db.OrganizationUnits.FirstOrDefault(x => x.ManagerId == employee.EmployeeId);
 
             if (managedUnit == null)
                 return; // zamestnanec nie je manažér
 
             if (managedUnit.UnitID != employee.UnitID)
             {
-                throw new Exception(
-                    "Manažér musí pracovať v organizačnej jednotke, ktorú vedie.");
+                throw new Exception("Manažér musí pracovať v organizačnej jednotke, ktorú vedie.");
             }
         }
 
