@@ -65,6 +65,7 @@ namespace CompanyApp.Forms
                 Email = textBoxEmail.Text,
                 UnitID = (int?)comboBoxDepartment.SelectedValue
             };
+
             var result = _employeeService.Update(tempEmp);
 
             if (!result.Success)

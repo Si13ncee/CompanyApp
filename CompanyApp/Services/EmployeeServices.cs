@@ -43,7 +43,8 @@ namespace CompanyApp.Services
         {
             try
             {
-                Validate(employee);                
+                Validate(employee);
+                
             }
             catch (Exception ex)
             {
@@ -53,7 +54,7 @@ namespace CompanyApp.Services
             using var db = new CompanyContext();
 
             var existing = db.Employees.Find(employee.EmployeeId);
-
+ 
             if (existing == null)
                 return OperationResult.Fail("Tento zamestnanec neexistuje v databáze.");
 

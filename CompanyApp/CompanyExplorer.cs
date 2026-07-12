@@ -34,21 +34,50 @@ namespace CompanyApp
         private void CompanyExplorer_Load(object sender, EventArgs e)
         {
 
-            LoadUnitTypes(); // loaduje enum typov pre OrganizationUnits
-            LoadManagers(); // loadne všetkých zamestnancov do comboBoxu pre výber
-            LoadEmployees();
+            LoadUnitTypes(); // loaduje enum typov pre OrganizationUnits           
             LoadOrganizationTree();
             loadParents();
+            LoadEmployees();
         }
-        private void LoadManagers()
+
+        private void LoadManagers(int? currentManagerId)
         {
-
             var employees = _employeeService.GetAll();
+            var units = _organizationServices.GetAll();
 
-            comboBoxManager.DataSource = employees;
+            var managerIds = units
+                .Where(x => x.ManagerId != null)
+                .Select(x => x.ManagerId)
+                .ToList();
+
+
+            var availableManagers = employees
+                .Where(x => !managerIds.Contains(x.EmployeeId))
+                .ToList();
+
+
+            if (currentManagerId is not null)
+            {
+                var currentManager = employees
+                    .FirstOrDefault(x => x.EmployeeId == currentManagerId);
+
+                if (currentManager != null &&
+                    !availableManagers.Any(x => x.EmployeeId == currentManager.EmployeeId))
+                {
+                    availableManagers.Add(currentManager);
+                }
+            }
+
+
+            comboBoxManager.DataSource = availableManagers;
             comboBoxManager.DisplayMember = "FullName";
             comboBoxManager.ValueMember = "EmployeeId";
 
+
+            if (currentManagerId is not null)
+            {
+                comboBoxManager.SelectedValue = currentManagerId.Value;
+            }
         }
 
         private void LoadUnitTypes()
@@ -116,6 +145,7 @@ namespace CompanyApp
             textBoxCode.Text = selectedUnit.Code;
             comboBoxType.SelectedItem = selectedUnit.UnitType;
             loadParents();
+            LoadManagers(selectedUnit.ManagerId);
             if (selectedUnit.ManagerId != null)
             {
                 comboBoxManager.SelectedValue = selectedUnit.ManagerId;

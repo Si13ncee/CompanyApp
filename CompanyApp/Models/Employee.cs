@@ -24,7 +24,5 @@ namespace CompanyApp.Models
         public string FullName => string.IsNullOrWhiteSpace(Title) ? $"{FirstName} {LastName}" : $"{Title} {FirstName} {LastName}";
 
         public int? UnitID { get; set; }
-
-        public OrganizationUnit? Unit { get; set; }
     }
 }

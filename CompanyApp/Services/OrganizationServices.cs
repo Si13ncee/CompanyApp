@@ -49,6 +49,7 @@ namespace CompanyApp.Services
             try
             {
                 Validate(unit);
+                ValidateManager(unit);
             }
             catch (Exception ex)
             {
@@ -219,6 +220,25 @@ namespace CompanyApp.Services
 
 
             return (UnitType)((int)parent.UnitType + 1);
+        }
+
+        private void ValidateManager(OrganizationUnit unit)
+        {
+            if (unit.ManagerId is null)
+                return;
+
+            using var db = new CompanyContext();
+
+            var alreadyManaged = db.OrganizationUnits
+                .Any(x =>
+                    x.ManagerId == unit.ManagerId &&
+                    x.UnitID != unit.UnitID);
+
+            if (alreadyManaged)
+            {
+                throw new Exception(
+                    "Tento zamestnanec už je manažérom inej organizačnej jednotky.");
+            }
         }
     }
 }
