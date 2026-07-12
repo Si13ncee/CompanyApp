@@ -30,10 +30,10 @@ namespace CompanyApp.Forms
         {
             LoadTypes(parent);
             LoadManagers();
-            LoadParents();
+            LoadParents(parent);
         }
 
-        private void LoadParents()
+        private void LoadParents(OrganizationUnit? parent)
         {
             if (comboBoxType.SelectedItem == null)
                 return;
@@ -54,10 +54,14 @@ namespace CompanyApp.Forms
 
             var units = _organizationService.GetAll().Where(x => x.UnitType == parentType).ToList();
 
-
             comboBoxParent.DisplayMember = "FullName";
             comboBoxParent.ValueMember = "UnitID";
-            comboBoxParent.DataSource = units;            
+            comboBoxParent.DataSource = units;
+
+            if (parent is not null)
+            {
+                comboBoxParent.SelectedValue = parent.UnitID;
+            }
         }
 
         private void LoadManagers()
@@ -88,7 +92,7 @@ namespace CompanyApp.Forms
 
         private void comboBoxType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadParents();
+            LoadParents(null);
 
             if (comboBoxType.SelectedItem is not UnitType type)
                 return;

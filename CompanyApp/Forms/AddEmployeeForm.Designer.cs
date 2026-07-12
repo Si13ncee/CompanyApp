@@ -127,19 +127,19 @@
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.Padding = new Padding(15);
             tableLayoutPanel1.RowCount = 6;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 16.666666F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 16.666666F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 16.666666F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 16.666666F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 16.666666F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 16.666666F));
             tableLayoutPanel1.Size = new Size(800, 350);
             tableLayoutPanel1.TabIndex = 6;
             // 
             // textBoxEmail
             // 
             textBoxEmail.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            textBoxEmail.Location = new Point(112, 273);
+            textBoxEmail.Location = new Point(112, 242);
             textBoxEmail.Name = "textBoxEmail";
             textBoxEmail.Size = new Size(670, 23);
             textBoxEmail.TabIndex = 20;
@@ -147,7 +147,7 @@
             // textBoxPhone
             // 
             textBoxPhone.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            textBoxPhone.Location = new Point(112, 213);
+            textBoxPhone.Location = new Point(112, 189);
             textBoxPhone.Name = "textBoxPhone";
             textBoxPhone.Size = new Size(670, 23);
             textBoxPhone.TabIndex = 19;
@@ -155,7 +155,7 @@
             // textBoxLastName
             // 
             textBoxLastName.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            textBoxLastName.Location = new Point(112, 153);
+            textBoxLastName.Location = new Point(112, 136);
             textBoxLastName.Name = "textBoxLastName";
             textBoxLastName.Size = new Size(670, 23);
             textBoxLastName.TabIndex = 18;
@@ -165,7 +165,7 @@
             comboBoxDepartment.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             comboBoxDepartment.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxDepartment.FormattingEnabled = true;
-            comboBoxDepartment.Location = new Point(112, 318);
+            comboBoxDepartment.Location = new Point(112, 296);
             comboBoxDepartment.Name = "comboBoxDepartment";
             comboBoxDepartment.Size = new Size(670, 23);
             comboBoxDepartment.TabIndex = 17;
@@ -174,7 +174,7 @@
             // 
             labelDepartment.Anchor = AnchorStyles.Left;
             labelDepartment.AutoSize = true;
-            labelDepartment.Location = new Point(18, 317);
+            labelDepartment.Location = new Point(18, 300);
             labelDepartment.Name = "labelDepartment";
             labelDepartment.Size = new Size(64, 15);
             labelDepartment.TabIndex = 16;
@@ -185,7 +185,7 @@
             // 
             labelEmail.Anchor = AnchorStyles.Left;
             labelEmail.AutoSize = true;
-            labelEmail.Location = new Point(18, 277);
+            labelEmail.Location = new Point(18, 246);
             labelEmail.Name = "labelEmail";
             labelEmail.Size = new Size(44, 15);
             labelEmail.TabIndex = 11;
@@ -195,7 +195,7 @@
             // textBoxFirstName
             // 
             textBoxFirstName.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            textBoxFirstName.Location = new Point(112, 93);
+            textBoxFirstName.Location = new Point(112, 83);
             textBoxFirstName.Name = "textBoxFirstName";
             textBoxFirstName.Size = new Size(670, 23);
             textBoxFirstName.TabIndex = 8;
@@ -204,7 +204,7 @@
             // 
             labelPhone.Anchor = AnchorStyles.Left;
             labelPhone.AutoSize = true;
-            labelPhone.Location = new Point(18, 217);
+            labelPhone.Location = new Point(18, 193);
             labelPhone.Name = "labelPhone";
             labelPhone.Size = new Size(88, 15);
             labelPhone.TabIndex = 6;
@@ -215,7 +215,7 @@
             // 
             labelLastName.Anchor = AnchorStyles.Left;
             labelLastName.AutoSize = true;
-            labelLastName.Location = new Point(18, 157);
+            labelLastName.Location = new Point(18, 140);
             labelLastName.Name = "labelLastName";
             labelLastName.Size = new Size(62, 15);
             labelLastName.TabIndex = 4;
@@ -226,7 +226,7 @@
             // 
             labelFirstName.Anchor = AnchorStyles.Left;
             labelFirstName.AutoSize = true;
-            labelFirstName.Location = new Point(18, 97);
+            labelFirstName.Location = new Point(18, 87);
             labelFirstName.Name = "labelFirstName";
             labelFirstName.Size = new Size(41, 15);
             labelFirstName.TabIndex = 2;
@@ -237,7 +237,7 @@
             // 
             labelName.Anchor = AnchorStyles.Left;
             labelName.AutoSize = true;
-            labelName.Location = new Point(18, 37);
+            labelName.Location = new Point(18, 34);
             labelName.Name = "labelName";
             labelName.Size = new Size(33, 15);
             labelName.TabIndex = 0;
@@ -247,7 +247,7 @@
             // textBoxTitle
             // 
             textBoxTitle.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            textBoxTitle.Location = new Point(112, 33);
+            textBoxTitle.Location = new Point(112, 30);
             textBoxTitle.Name = "textBoxTitle";
             textBoxTitle.Size = new Size(670, 23);
             textBoxTitle.TabIndex = 7;
