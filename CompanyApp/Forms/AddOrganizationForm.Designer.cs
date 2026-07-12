@@ -134,22 +134,22 @@
             // 
             // comboBoxParent
             // 
-            comboBoxParent.Dock = DockStyle.Fill;
+            comboBoxParent.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             comboBoxParent.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxParent.FormattingEnabled = true;
-            comboBoxParent.Location = new Point(81, 198);
+            comboBoxParent.Location = new Point(144, 213);
             comboBoxParent.Name = "comboBoxParent";
-            comboBoxParent.Size = new Size(701, 23);
+            comboBoxParent.Size = new Size(638, 23);
             comboBoxParent.TabIndex = 14;
             // 
             // comboBoxManager
             // 
-            comboBoxManager.Dock = DockStyle.Fill;
+            comboBoxManager.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             comboBoxManager.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxManager.FormattingEnabled = true;
-            comboBoxManager.Location = new Point(81, 258);
+            comboBoxManager.Location = new Point(144, 273);
             comboBoxManager.Name = "comboBoxManager";
-            comboBoxManager.Size = new Size(701, 23);
+            comboBoxManager.Size = new Size(638, 23);
             comboBoxManager.TabIndex = 13;
             // 
             // labelManager
@@ -158,17 +158,17 @@
             labelManager.AutoSize = true;
             labelManager.Location = new Point(18, 277);
             labelManager.Name = "labelManager";
-            labelManager.Size = new Size(57, 15);
+            labelManager.Size = new Size(55, 15);
             labelManager.TabIndex = 11;
-            labelManager.Text = "Manager:";
+            labelManager.Text = "Manažér:";
             labelManager.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // textBoxCode
             // 
-            textBoxCode.Dock = DockStyle.Fill;
-            textBoxCode.Location = new Point(81, 78);
+            textBoxCode.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            textBoxCode.Location = new Point(144, 93);
             textBoxCode.Name = "textBoxCode";
-            textBoxCode.Size = new Size(701, 23);
+            textBoxCode.Size = new Size(638, 23);
             textBoxCode.TabIndex = 8;
             // 
             // labelParent
@@ -177,9 +177,9 @@
             labelParent.AutoSize = true;
             labelParent.Location = new Point(18, 217);
             labelParent.Name = "labelParent";
-            labelParent.Size = new Size(47, 15);
+            labelParent.Size = new Size(120, 15);
             labelParent.TabIndex = 6;
-            labelParent.Text = "Parent: ";
+            labelParent.Text = "Nadriadená jednotka:";
             labelParent.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // labelType
@@ -188,9 +188,9 @@
             labelType.AutoSize = true;
             labelType.Location = new Point(18, 157);
             labelType.Name = "labelType";
-            labelType.Size = new Size(34, 15);
+            labelType.Size = new Size(28, 15);
             labelType.TabIndex = 4;
-            labelType.Text = "Type:";
+            labelType.Text = "Typ:";
             labelType.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // labelCode
@@ -199,9 +199,9 @@
             labelCode.AutoSize = true;
             labelCode.Location = new Point(18, 97);
             labelCode.Name = "labelCode";
-            labelCode.Size = new Size(38, 15);
+            labelCode.Size = new Size(31, 15);
             labelCode.TabIndex = 2;
-            labelCode.Text = "Code:";
+            labelCode.Text = "Kód:";
             labelCode.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // labelName
@@ -210,27 +210,27 @@
             labelName.AutoSize = true;
             labelName.Location = new Point(18, 37);
             labelName.Name = "labelName";
-            labelName.Size = new Size(42, 15);
+            labelName.Size = new Size(41, 15);
             labelName.TabIndex = 0;
-            labelName.Text = "Name:";
+            labelName.Text = "Meno:";
             labelName.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // textBoxName
             // 
-            textBoxName.Dock = DockStyle.Fill;
-            textBoxName.Location = new Point(81, 18);
+            textBoxName.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            textBoxName.Location = new Point(144, 33);
             textBoxName.Name = "textBoxName";
-            textBoxName.Size = new Size(701, 23);
+            textBoxName.Size = new Size(638, 23);
             textBoxName.TabIndex = 7;
             // 
             // comboBoxType
             // 
-            comboBoxType.Dock = DockStyle.Fill;
+            comboBoxType.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             comboBoxType.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxType.FormattingEnabled = true;
-            comboBoxType.Location = new Point(81, 138);
+            comboBoxType.Location = new Point(144, 153);
             comboBoxType.Name = "comboBoxType";
-            comboBoxType.Size = new Size(701, 23);
+            comboBoxType.Size = new Size(638, 23);
             comboBoxType.TabIndex = 9;
             comboBoxType.SelectedIndexChanged += comboBoxType_SelectedIndexChanged;
             // 

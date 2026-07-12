@@ -63,8 +63,16 @@ namespace CompanyApp.Forms
         private void LoadManagers()
         {
             var employees = _employeeService.GetAll();
+            var units = _organizationService.GetAll();
+            var managerIds = units.Where(x => x.ManagerId != null).Select(x => x.ManagerId).ToList();
 
-            comboBoxManager.DataSource = employees;
+
+            var availableManagers = employees.Where(x => !managerIds.Contains(x.EmployeeId)).ToList();
+
+
+            comboBoxManager.DataSource = availableManagers;
+
+
 
             comboBoxManager.DisplayMember = "FullName";
             comboBoxManager.ValueMember = "EmployeeId";
@@ -81,6 +89,32 @@ namespace CompanyApp.Forms
         private void comboBoxType_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadParents();
+
+            if (comboBoxType.SelectedItem is not UnitType type)
+                return;
+
+            switch (type)
+            {
+                case UnitType.Company:
+                    labelManager.Text = "Riaditeľ:";
+                    break;
+
+                case UnitType.Division:
+                    labelManager.Text = "Vedúci divízie:";
+                    break;
+
+                case UnitType.Project:
+                    labelManager.Text = "Vedúci projektu:";
+                    break;
+
+                case UnitType.Department:
+                    labelManager.Text = "Vedúci oddelenia:";
+                    break;
+
+                default:
+                    labelManager.Text = "Manažér:";
+                    break;
+            }
         }
 
         private void buttonCreate_Click(object sender, EventArgs e)

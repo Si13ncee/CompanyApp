@@ -43,6 +43,7 @@ namespace CompanyApp.Services
         {
             try
             {
+                ValidateEmployeeUnit(employee);
                 Validate(employee);
                 
             }
@@ -99,7 +100,25 @@ namespace CompanyApp.Services
 
         private void Validate(Employee emp)
         {          
+            
             EmployeeValidator.Validate(emp);
+        }
+
+        private void ValidateEmployeeUnit(Employee employee)
+        {
+            using var db = new CompanyContext();
+
+            var managedUnit = db.OrganizationUnits
+                .FirstOrDefault(x => x.ManagerId == employee.EmployeeId);
+
+            if (managedUnit == null)
+                return; // zamestnanec nie je manažér
+
+            if (managedUnit.UnitID != employee.UnitID)
+            {
+                throw new Exception(
+                    "Manažér musí pracovať v organizačnej jednotke, ktorú vedie.");
+            }
         }
 
         public static string NormalizePhoneNumber(string phone)

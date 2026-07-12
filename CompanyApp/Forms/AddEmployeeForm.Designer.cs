@@ -138,36 +138,36 @@
             // 
             // textBoxEmail
             // 
-            textBoxEmail.Dock = DockStyle.Fill;
-            textBoxEmail.Location = new Point(97, 258);
+            textBoxEmail.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            textBoxEmail.Location = new Point(112, 273);
             textBoxEmail.Name = "textBoxEmail";
-            textBoxEmail.Size = new Size(685, 23);
+            textBoxEmail.Size = new Size(670, 23);
             textBoxEmail.TabIndex = 20;
             // 
             // textBoxPhone
             // 
-            textBoxPhone.Dock = DockStyle.Fill;
-            textBoxPhone.Location = new Point(97, 198);
+            textBoxPhone.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            textBoxPhone.Location = new Point(112, 213);
             textBoxPhone.Name = "textBoxPhone";
-            textBoxPhone.Size = new Size(685, 23);
+            textBoxPhone.Size = new Size(670, 23);
             textBoxPhone.TabIndex = 19;
             // 
             // textBoxLastName
             // 
-            textBoxLastName.Dock = DockStyle.Fill;
-            textBoxLastName.Location = new Point(97, 138);
+            textBoxLastName.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            textBoxLastName.Location = new Point(112, 153);
             textBoxLastName.Name = "textBoxLastName";
-            textBoxLastName.Size = new Size(685, 23);
+            textBoxLastName.Size = new Size(670, 23);
             textBoxLastName.TabIndex = 18;
             // 
             // comboBoxDepartment
             // 
-            comboBoxDepartment.Dock = DockStyle.Fill;
+            comboBoxDepartment.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             comboBoxDepartment.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxDepartment.FormattingEnabled = true;
-            comboBoxDepartment.Location = new Point(97, 318);
+            comboBoxDepartment.Location = new Point(112, 318);
             comboBoxDepartment.Name = "comboBoxDepartment";
-            comboBoxDepartment.Size = new Size(685, 23);
+            comboBoxDepartment.Size = new Size(670, 23);
             comboBoxDepartment.TabIndex = 17;
             // 
             // labelDepartment
@@ -176,9 +176,9 @@
             labelDepartment.AutoSize = true;
             labelDepartment.Location = new Point(18, 317);
             labelDepartment.Name = "labelDepartment";
-            labelDepartment.Size = new Size(73, 15);
+            labelDepartment.Size = new Size(64, 15);
             labelDepartment.TabIndex = 16;
-            labelDepartment.Text = "Department:";
+            labelDepartment.Text = "Oddelenie:";
             labelDepartment.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // labelEmail
@@ -187,17 +187,17 @@
             labelEmail.AutoSize = true;
             labelEmail.Location = new Point(18, 277);
             labelEmail.Name = "labelEmail";
-            labelEmail.Size = new Size(39, 15);
+            labelEmail.Size = new Size(44, 15);
             labelEmail.TabIndex = 11;
-            labelEmail.Text = "Email:";
+            labelEmail.Text = "E-mail:";
             labelEmail.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // textBoxFirstName
             // 
-            textBoxFirstName.Dock = DockStyle.Fill;
-            textBoxFirstName.Location = new Point(97, 78);
+            textBoxFirstName.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            textBoxFirstName.Location = new Point(112, 93);
             textBoxFirstName.Name = "textBoxFirstName";
-            textBoxFirstName.Size = new Size(685, 23);
+            textBoxFirstName.Size = new Size(670, 23);
             textBoxFirstName.TabIndex = 8;
             // 
             // labelPhone
@@ -206,9 +206,9 @@
             labelPhone.AutoSize = true;
             labelPhone.Location = new Point(18, 217);
             labelPhone.Name = "labelPhone";
-            labelPhone.Size = new Size(44, 15);
+            labelPhone.Size = new Size(88, 15);
             labelPhone.TabIndex = 6;
-            labelPhone.Text = "Phone:";
+            labelPhone.Text = "Telefónné číslo:";
             labelPhone.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // labelLastName
@@ -217,9 +217,9 @@
             labelLastName.AutoSize = true;
             labelLastName.Location = new Point(18, 157);
             labelLastName.Name = "labelLastName";
-            labelLastName.Size = new Size(66, 15);
+            labelLastName.Size = new Size(62, 15);
             labelLastName.TabIndex = 4;
-            labelLastName.Text = "Last Name:";
+            labelLastName.Text = "Priezvisko:";
             labelLastName.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // labelFirstName
@@ -228,9 +228,9 @@
             labelFirstName.AutoSize = true;
             labelFirstName.Location = new Point(18, 97);
             labelFirstName.Name = "labelFirstName";
-            labelFirstName.Size = new Size(67, 15);
+            labelFirstName.Size = new Size(41, 15);
             labelFirstName.TabIndex = 2;
-            labelFirstName.Text = "First Name:";
+            labelFirstName.Text = "Meno:";
             labelFirstName.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // labelName
@@ -239,17 +239,17 @@
             labelName.AutoSize = true;
             labelName.Location = new Point(18, 37);
             labelName.Name = "labelName";
-            labelName.Size = new Size(32, 15);
+            labelName.Size = new Size(33, 15);
             labelName.TabIndex = 0;
-            labelName.Text = "Title:";
+            labelName.Text = "Titul:";
             labelName.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // textBoxTitle
             // 
-            textBoxTitle.Dock = DockStyle.Fill;
-            textBoxTitle.Location = new Point(97, 18);
+            textBoxTitle.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            textBoxTitle.Location = new Point(112, 33);
             textBoxTitle.Name = "textBoxTitle";
-            textBoxTitle.Size = new Size(685, 23);
+            textBoxTitle.Size = new Size(670, 23);
             textBoxTitle.TabIndex = 7;
             // 
             // flowLayoutPanel1
@@ -270,7 +270,7 @@
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new Size(75, 23);
             buttonCancel.TabIndex = 0;
-            buttonCancel.Text = "Cancel";
+            buttonCancel.Text = "Zrušiť";
             buttonCancel.UseVisualStyleBackColor = true;
             buttonCancel.Click += buttonCancel_Click;
             // 
@@ -280,7 +280,7 @@
             buttonAdd.Name = "buttonAdd";
             buttonAdd.Size = new Size(75, 23);
             buttonAdd.TabIndex = 1;
-            buttonAdd.Text = "Add";
+            buttonAdd.Text = "Pridať";
             buttonAdd.UseVisualStyleBackColor = true;
             buttonAdd.Click += buttonAdd_Click;
             // 

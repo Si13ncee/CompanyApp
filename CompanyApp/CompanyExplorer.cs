@@ -45,15 +45,10 @@ namespace CompanyApp
             var employees = _employeeService.GetAll();
             var units = _organizationServices.GetAll();
 
-            var managerIds = units
-                .Where(x => x.ManagerId != null)
-                .Select(x => x.ManagerId)
-                .ToList();
+            var managerIds = units.Where(x => x.ManagerId != null).Select(x => x.ManagerId).ToList();
 
 
-            var availableManagers = employees
-                .Where(x => !managerIds.Contains(x.EmployeeId))
-                .ToList();
+            var availableManagers = employees.Where(x => !managerIds.Contains(x.EmployeeId)).ToList();
 
 
             if (currentManagerId is not null)
@@ -132,6 +127,15 @@ namespace CompanyApp
         {
 
             var employees = _employeeService.GetAll();
+            var units = _organizationServices.GetAll();
+
+            foreach (var employee in employees)
+            {
+                employee.DepartmentName = units
+                    .FirstOrDefault(u => u.UnitID == employee.UnitID)?
+                    .Name ?? "";
+            }
+
             dgvEmployees.DataSource = employees;
 
         }
@@ -225,6 +229,32 @@ namespace CompanyApp
         private void comboBoxType_SelectedIndexChanged(object sender, EventArgs e)
         {
             loadParents();
+
+            if (comboBoxType.SelectedItem is not UnitType type)
+                return;
+
+            switch (type)
+            {
+                case UnitType.Company:
+                    labelManager.Text = "Riaditeľ:";
+                    break;
+
+                case UnitType.Division:
+                    labelManager.Text = "Vedúci divízie:";
+                    break;
+
+                case UnitType.Project:
+                    labelManager.Text = "Vedúci projektu:";
+                    break;
+
+                case UnitType.Department:
+                    labelManager.Text = "Vedúci oddelenia:";
+                    break;
+
+                default:
+                    labelManager.Text = "Manažér:";
+                    break;
+            }
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)

@@ -33,7 +33,7 @@
             splitContainer2 = new SplitContainer();
             tvOrganization = new TreeView();
             splitContainer4 = new SplitContainer();
-            textBox1 = new TextBox();
+            labelTitle = new Label();
             splitContainer5 = new SplitContainer();
             tableLayoutPanel1 = new TableLayoutPanel();
             comboBoxParent = new ComboBox();
@@ -138,7 +138,7 @@
             // 
             // splitContainer4.Panel1
             // 
-            splitContainer4.Panel1.Controls.Add(textBox1);
+            splitContainer4.Panel1.Controls.Add(labelTitle);
             // 
             // splitContainer4.Panel2
             // 
@@ -147,15 +147,15 @@
             splitContainer4.SplitterDistance = 26;
             splitContainer4.TabIndex = 0;
             // 
-            // textBox1
+            // labelTitle
             // 
-            textBox1.Dock = DockStyle.Fill;
-            textBox1.Location = new Point(0, 0);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(546, 23);
-            textBox1.TabIndex = 0;
-            textBox1.Text = "Organization Unit Details";
-            textBox1.TextAlign = HorizontalAlignment.Center;
+            labelTitle.AutoSize = true;
+            labelTitle.Location = new Point(204, 3);
+            labelTitle.Name = "labelTitle";
+            labelTitle.Size = new Size(138, 15);
+            labelTitle.TabIndex = 0;
+            labelTitle.Text = "Organization Unit Details";
+            labelTitle.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // splitContainer5
             // 
@@ -205,22 +205,22 @@
             // 
             // comboBoxParent
             // 
-            comboBoxParent.Dock = DockStyle.Fill;
+            comboBoxParent.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             comboBoxParent.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxParent.FormattingEnabled = true;
-            comboBoxParent.Location = new Point(81, 120);
+            comboBoxParent.Location = new Point(141, 122);
             comboBoxParent.Name = "comboBoxParent";
-            comboBoxParent.Size = new Size(447, 23);
+            comboBoxParent.Size = new Size(387, 23);
             comboBoxParent.TabIndex = 14;
             // 
             // comboBoxManager
             // 
-            comboBoxManager.Dock = DockStyle.Fill;
+            comboBoxManager.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             comboBoxManager.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxManager.FormattingEnabled = true;
-            comboBoxManager.Location = new Point(81, 154);
+            comboBoxManager.Location = new Point(141, 158);
             comboBoxManager.Name = "comboBoxManager";
-            comboBoxManager.Size = new Size(447, 23);
+            comboBoxManager.Size = new Size(387, 23);
             comboBoxManager.TabIndex = 13;
             // 
             // labelManager
@@ -229,17 +229,17 @@
             labelManager.AutoSize = true;
             labelManager.Location = new Point(18, 162);
             labelManager.Name = "labelManager";
-            labelManager.Size = new Size(57, 15);
+            labelManager.Size = new Size(55, 15);
             labelManager.TabIndex = 11;
-            labelManager.Text = "Manager:";
+            labelManager.Text = "Manažér:";
             labelManager.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // textBoxCode
             // 
-            textBoxCode.Dock = DockStyle.Fill;
-            textBoxCode.Location = new Point(81, 52);
+            textBoxCode.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            textBoxCode.Location = new Point(141, 54);
             textBoxCode.Name = "textBoxCode";
-            textBoxCode.Size = new Size(447, 23);
+            textBoxCode.Size = new Size(387, 23);
             textBoxCode.TabIndex = 8;
             // 
             // labelParent
@@ -248,9 +248,9 @@
             labelParent.AutoSize = true;
             labelParent.Location = new Point(18, 126);
             labelParent.Name = "labelParent";
-            labelParent.Size = new Size(47, 15);
+            labelParent.Size = new Size(117, 15);
             labelParent.TabIndex = 6;
-            labelParent.Text = "Parent: ";
+            labelParent.Text = "Nadradená jednotka:";
             labelParent.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // labelType
@@ -259,9 +259,9 @@
             labelType.AutoSize = true;
             labelType.Location = new Point(18, 92);
             labelType.Name = "labelType";
-            labelType.Size = new Size(34, 15);
+            labelType.Size = new Size(28, 15);
             labelType.TabIndex = 4;
-            labelType.Text = "Type:";
+            labelType.Text = "Typ:";
             labelType.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // labelCode
@@ -270,9 +270,9 @@
             labelCode.AutoSize = true;
             labelCode.Location = new Point(18, 58);
             labelCode.Name = "labelCode";
-            labelCode.Size = new Size(38, 15);
+            labelCode.Size = new Size(31, 15);
             labelCode.TabIndex = 2;
-            labelCode.Text = "Code:";
+            labelCode.Text = "Kód:";
             labelCode.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // labelName
@@ -281,27 +281,27 @@
             labelName.AutoSize = true;
             labelName.Location = new Point(18, 24);
             labelName.Name = "labelName";
-            labelName.Size = new Size(42, 15);
+            labelName.Size = new Size(41, 15);
             labelName.TabIndex = 0;
-            labelName.Text = "Name:";
+            labelName.Text = "Meno:";
             labelName.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // textBoxName
             // 
-            textBoxName.Dock = DockStyle.Fill;
-            textBoxName.Location = new Point(81, 18);
+            textBoxName.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            textBoxName.Location = new Point(141, 20);
             textBoxName.Name = "textBoxName";
-            textBoxName.Size = new Size(447, 23);
+            textBoxName.Size = new Size(387, 23);
             textBoxName.TabIndex = 7;
             // 
             // comboBoxType
             // 
-            comboBoxType.Dock = DockStyle.Fill;
+            comboBoxType.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             comboBoxType.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxType.FormattingEnabled = true;
-            comboBoxType.Location = new Point(81, 86);
+            comboBoxType.Location = new Point(141, 88);
             comboBoxType.Name = "comboBoxType";
-            comboBoxType.Size = new Size(447, 23);
+            comboBoxType.Size = new Size(387, 23);
             comboBoxType.TabIndex = 9;
             comboBoxType.SelectedIndexChanged += comboBoxType_SelectedIndexChanged;
             // 
@@ -325,7 +325,7 @@
             buttonSave.Name = "buttonSave";
             buttonSave.Size = new Size(75, 25);
             buttonSave.TabIndex = 0;
-            buttonSave.Text = "Save";
+            buttonSave.Text = "Uložiť";
             buttonSave.UseVisualStyleBackColor = true;
             buttonSave.Click += buttonSave_Click;
             // 
@@ -338,7 +338,7 @@
             buttonDelete.Name = "buttonDelete";
             buttonDelete.Size = new Size(75, 25);
             buttonDelete.TabIndex = 1;
-            buttonDelete.Text = "Delete";
+            buttonDelete.Text = "Vymazať";
             buttonDelete.UseVisualStyleBackColor = true;
             buttonDelete.Click += buttonDelete_Click;
             // 
@@ -349,9 +349,9 @@
             buttonAddChild.Location = new Point(165, 0);
             buttonAddChild.Margin = new Padding(3, 0, 3, 3);
             buttonAddChild.Name = "buttonAddChild";
-            buttonAddChild.Size = new Size(75, 25);
+            buttonAddChild.Size = new Size(120, 25);
             buttonAddChild.TabIndex = 2;
-            buttonAddChild.Text = "Add Child";
+            buttonAddChild.Text = "Pridať podjednotku";
             buttonAddChild.UseVisualStyleBackColor = true;
             buttonAddChild.Click += buttonAddChild_Click;
             // 
@@ -393,9 +393,9 @@
             buttonAddEmp.Location = new Point(3, 0);
             buttonAddEmp.Margin = new Padding(3, 0, 3, 3);
             buttonAddEmp.Name = "buttonAddEmp";
-            buttonAddEmp.Size = new Size(94, 25);
+            buttonAddEmp.Size = new Size(121, 25);
             buttonAddEmp.TabIndex = 1;
-            buttonAddEmp.Text = "Add Employee";
+            buttonAddEmp.Text = "Pridať zamestnanca";
             buttonAddEmp.UseVisualStyleBackColor = true;
             buttonAddEmp.Click += buttonAddEmp_Click;
             // 
@@ -403,12 +403,12 @@
             // 
             buttonEditEmp.Anchor = AnchorStyles.Left;
             buttonEditEmp.AutoSize = true;
-            buttonEditEmp.Location = new Point(103, 0);
+            buttonEditEmp.Location = new Point(130, 0);
             buttonEditEmp.Margin = new Padding(3, 0, 3, 3);
             buttonEditEmp.Name = "buttonEditEmp";
-            buttonEditEmp.Size = new Size(92, 25);
+            buttonEditEmp.Size = new Size(128, 25);
             buttonEditEmp.TabIndex = 2;
-            buttonEditEmp.Text = "Edit Employee";
+            buttonEditEmp.Text = "Upraviť zamestnanca";
             buttonEditEmp.UseVisualStyleBackColor = true;
             buttonEditEmp.Click += buttonEditEmp_Click;
             // 
@@ -416,12 +416,12 @@
             // 
             buttonDeleteEmp.Anchor = AnchorStyles.Left;
             buttonDeleteEmp.AutoSize = true;
-            buttonDeleteEmp.Location = new Point(201, 0);
+            buttonDeleteEmp.Location = new Point(264, 0);
             buttonDeleteEmp.Margin = new Padding(3, 0, 3, 3);
             buttonDeleteEmp.Name = "buttonDeleteEmp";
-            buttonDeleteEmp.Size = new Size(105, 25);
+            buttonDeleteEmp.Size = new Size(135, 25);
             buttonDeleteEmp.TabIndex = 3;
-            buttonDeleteEmp.Text = "Delete Employee";
+            buttonDeleteEmp.Text = "Vymazať zamestnanca";
             buttonDeleteEmp.UseVisualStyleBackColor = true;
             buttonDeleteEmp.Click += buttonDeleteEmp_Click;
             // 
@@ -487,7 +487,6 @@
         private FlowLayoutPanel flowLayoutPanel1;
         private DataGridView dgvEmployees;
         private SplitContainer splitContainer4;
-        private TextBox textBox1;
         private SplitContainer splitContainer5;
         private TableLayoutPanel tableLayoutPanel1;
         private TextBox textBoxCode;
@@ -507,5 +506,6 @@
         private Label labelManager;
         private ComboBox comboBoxManager;
         private ComboBox comboBoxParent;
+        private Label labelTitle;
     }
 }

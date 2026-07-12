@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace CompanyApp.Models
@@ -22,7 +23,10 @@ namespace CompanyApp.Models
 
         public override string ToString() => $"{FirstName} {LastName}";
         public string FullName => string.IsNullOrWhiteSpace(Title) ? $"{FirstName} {LastName}" : $"{Title} {FirstName} {LastName}";
-
+        
         public int? UnitID { get; set; }
+
+        [NotMapped]
+        public string DepartmentName { get; set; }
     }
 }
