@@ -156,6 +156,7 @@ namespace CompanyApp.Services
             }
 
         }
+        
 
         public bool IsChildOf(OrganizationUnit parent, OrganizationUnit possibleChild)
         {

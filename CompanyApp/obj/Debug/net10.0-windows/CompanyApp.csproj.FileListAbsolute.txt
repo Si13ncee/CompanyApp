@@ -151,3 +151,4 @@ C:\Praca\Kros\CompanyApp\CompanyApp\obj\Debug\net10.0-windows\CompanyApp.csproj.
 C:\Praca\Kros\CompanyApp\CompanyApp\obj\Debug\net10.0-windows\CompanyApp.csproj.Up2Date
 C:\Praca\Kros\CompanyApp\CompanyApp\obj\Debug\net10.0-windows\CompanyApp.Forms.AddOrganizationForm.resources
 C:\Praca\Kros\CompanyApp\CompanyApp\obj\Debug\net10.0-windows\CompanyApp.Forms.AddEmployeeForm.resources
+C:\Praca\Kros\CompanyApp\CompanyApp\obj\Debug\net10.0-windows\CompanyApp.Forms.EditEmployeeForm.resources

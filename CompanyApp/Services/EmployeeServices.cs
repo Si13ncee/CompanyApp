@@ -26,6 +26,7 @@ namespace CompanyApp.Services
             try
             {
                 using var db = new CompanyContext();
+                employee.Phone = NormalizePhoneNumber(employee.Phone);
                 Validate(employee);
                 db.Employees.Add(employee);
                 db.SaveChanges();
@@ -38,34 +39,54 @@ namespace CompanyApp.Services
             
         }
 
-        public void Update(Employee employee)
+        public OperationResult Update(Employee employee)
         {
+            try
+            {
+                Validate(employee);                
+            }
+            catch (Exception ex)
+            {
+                return OperationResult.Fail(ex.Message);
+            }
+
             using var db = new CompanyContext();
 
             var existing = db.Employees.Find(employee.EmployeeId);
 
             if (existing == null)
-                return;
+                return OperationResult.Fail("Tento zamestnanec neexistuje v databáze.");
 
-
+            
             existing.Title = employee.Title;
             existing.FirstName = employee.FirstName;
             existing.LastName = employee.LastName;
             existing.Phone = employee.Phone;
             existing.Email = employee.Email;
+            existing.UnitID = employee.UnitID;
 
             db.SaveChanges();
+            return OperationResult.Ok();
         }
 
-        public void Delete(int id)
+        public OperationResult Delete(int id)
         {
             using var db = new CompanyContext();
             var employee = db.Employees.Find(id);
             if (employee == null)
-                return;
+                return OperationResult.Fail("Neexistuje zamestnanec s takýmto id.");
+
+            bool isManager = db.OrganizationUnits.Any(x => x.ManagerId == employee.EmployeeId);
+
+            if (isManager)
+            {
+                return OperationResult.Fail(
+                    $"Zamestnanec {employee.FullName} je vedúcim organizačnej jednotky. Nemôžeš ho zmazať.");
+            }
 
             db.Employees.Remove(employee);
             db.SaveChanges();
+            return OperationResult.Ok();
         }
 
         public bool Exists(int id)
@@ -76,18 +97,30 @@ namespace CompanyApp.Services
         }
 
         private void Validate(Employee emp)
+        {          
+            EmployeeValidator.Validate(emp);
+        }
+
+        public static string NormalizePhoneNumber(string phone)
         {
-            if (string.IsNullOrWhiteSpace(emp.FirstName))
-                throw new Exception("Zamestnanec musí mať meno!");
+            if (string.IsNullOrWhiteSpace(phone))
+                return phone;
 
-            if (string.IsNullOrWhiteSpace(emp.LastName))
-                throw new Exception("Zamestnanec musí mať priezvisko!");
+            // odstráni medzery, pomlčky, zátvorky
+            phone = phone
+                .Replace(" ", "")
+                .Replace("-", "")
+                .Replace("(", "")
+                .Replace(")", "");
 
-            if (!EmployeeValidator.IsValidEmail(emp.Email))
-                throw new Exception($"Invalid email: {emp.Email}");
 
-            if (emp.UnitID == null)
-                throw new Exception("Oddelenie je povinné.");
+            // slovenský formát 0900xxxxxx
+            if (phone.StartsWith("0"))
+            {
+                phone = "+421" + phone.Substring(1);
+            }
+
+            return phone;
         }
     }
 }

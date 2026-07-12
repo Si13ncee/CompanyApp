@@ -252,5 +252,72 @@ namespace CompanyApp
             }
             LoadEmployees();
         }
+
+        private void buttonDeleteEmp_Click(object sender, EventArgs e)
+        {
+            var selectedRows = dgvEmployees.SelectedRows;
+
+            if (selectedRows.Count == 0)
+            {
+                MessageBox.Show(
+                    "Vyberte aspoň jedného zamestnanca.");
+                return;
+            }
+            List<int> employeeIds = new();
+
+            foreach (DataGridViewRow row in selectedRows)
+            {
+                int id = (int)row.Cells["EmployeeId"].Value;
+
+                employeeIds.Add(id);
+            }
+            var result = MessageBox.Show(
+                    $"Naozaj chcete odstrániť {employeeIds.Count} zamestnancov?",
+                    "Potvrdenie mazania",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+            if (result != DialogResult.Yes)
+                return;
+
+            foreach (var id in employeeIds)
+            {
+                var deleteResult = _employeeService.Delete(id);
+
+                if (!deleteResult.Success)
+                {
+                    MessageBox.Show(deleteResult.Message);
+                }
+            }
+            LoadEmployees();
+        }
+
+        private void buttonEditEmp_Click(object sender, EventArgs e)
+        {
+            if (dgvEmployees.SelectedRows.Count != 1)
+            {
+                MessageBox.Show("Pre úpravu vyberte presne jedného zamestnanca.");
+                return;
+            }
+
+            var row = dgvEmployees.SelectedRows[0];
+
+            var employee = (Employee)dgvEmployees.SelectedRows[0].DataBoundItem;
+
+            using (var form = new EditEmployeeForm(employee))
+            {
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    LoadEmployees();
+                }
+            }
+
+
+        }
+
+        private void dgvEmployees_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            buttonEditEmp_Click(null, null);
+        }
     }
 }
