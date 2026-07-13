@@ -11,3 +11,5 @@ Zadanie na pohovor - KROS
 - Po rozbehaní databázy stačí buď projekt otvoriť vo visual studiu a zapnúť, alebo v CompanyApp\bin\Release\net10.0-windows je .exe súbor cez ktorý sa dá appka spustiť
 
 
+# Pozn.
+- Manažéra/Vedúceho pre organizačnú jednotku môže byť priradený cez appku len taký zamestnanec, ktorý je priradený do tohto oddelenia
